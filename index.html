@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passphrase.school - Secure Passphrase Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <h1 class="site-title">Passphrase.school</h1>
+            <p class="site-tagline">Generate secure, memorable passphrases</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="step-selection">
+            <h2>Select your grade level:</h2>
+            <div class="level-buttons">
+                <button class="level-btn" data-level="elementary">Elementary School</button>
+                <button class="level-btn" data-level="middle">Middle School</button>
+                <button class="level-btn" data-level="high">High School</button>
+                <button class="level-btn" data-level="staff">Staff</button>
+            </div>
+            
+            <!-- Wrap disclaimers in a container with fixed height -->
+            <div class="disclaimer-container">
+                <div class="level-disclaimer" data-level="elementary">
+                    <p>Elementary passphrases use 2 short words with 1 number.</p>
+                </div>
+                <div class="level-disclaimer" data-level="middle">
+                    <p>Middle school passphrases use 2 longer words with 1 number.</p>
+                </div>
+                <div class="level-disclaimer" data-level="high">
+                    <p>High school passphrases use 3 words with 2 numbers for extra security.</p>
+                </div>
+                <div class="level-disclaimer" data-level="staff">
+                    <p>Staff passphrases use 4 words with 2 numbers for maximum security.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="generator-container hidden" id="generator">
+            <div class="result-container">
+                <input type="text" id="passphraseResult" readonly title="Click to copy to clipboard">
+            </div>
+            
+            <div class="copy-instructions">
+                <p>Tap the passphrase above to copy it to your clipboard</p>
+            </div>
+
+            <button id="generateBtn" class="btn-primary">Generate New Passphrase</button>
+
+            <div class="advanced-options">
+                <div class="options-toggle" id="optionsToggle">
+                    <span>Advanced options</span>
+                    <button id="toggleOptions" class="toggle-btn">+</button>
+                </div>
+                
+                <div class="options-panel" id="optionsPanel">
+                    <div class="options-container">
+                        <div class="option-group">
+                            <label for="separator">Word separator:</label>
+                            <select id="separator">
+                                <option value=" " selected>Space ( )</option>
+                                <option value="-">Hyphen (-)</option>
+                                <option value=".">Period (.)</option>
+                                <option value="_">Underscore (_)</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label for="capitalization">Word capitalization:</label>
+                            <select id="capitalization">
+                                <option value="first" selected>First word</option>
+                                <option value="none">None</option>
+                                <option value="all">All words</option>
+                                <option value="random">Random word</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="education-section" id="why-passphrases">
+        <div class="container">
+            <h2>Why Use Passphrases?</h2>
+            
+            <div class="info-columns">
+                <div class="info-column">
+                    <h3>Stronger Security</h3>
+                    <p>Passphrases are significantly more secure than traditional passwords. A four-word passphrase contains more entropy (randomness) than a complex 8-character password, making it exponentially harder for attackers to crack.</p>
+                </div>
+                
+                <div class="info-column">
+                    <h3>Easier to Remember</h3>
+                    <p>While complex passwords like "P@s5w0rd!" are difficult to remember, passphrases like "correct-horse-battery-staple" create mental images that are much easier for the human brain to recall accurately.</p>
+                </div>
+                
+                <div class="info-column">
+                    <h3>Protection Against Attacks</h3>
+                    <p>Passphrases provide strong defense against:</p>
+                    <ul>
+                        <li>Dictionary attacks</li>
+                        <li>Brute force attempts</li>
+                        <li>Rainbow table attacks</li>
+                        <li>Shoulder surfing</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="passphrase-tips">
+                <h3>Best Practices</h3>
+                <ul>
+                    <li>Use at least 4 random words for strong security</li>
+                    <li>Add numbers or special characters for extra protection</li>
+                    <li>Use different passphrases for different accounts</li>
+                    <li>Change your passphrases periodically</li>
+                    <li>Consider using a password manager to store your passphrases</li>
+                </ul>
+            </div>
+            
+            <div class="educational-note">
+                <p><strong>Remember:</strong> The most secure password is one you can remember but others cannot guess. Passphrases strike the perfect balance between security and memorability.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2023 Passphrase.school | A secure passphrase generator for educational environments</p>
+            <p class="footer-links">
+                <a href="#why-passphrases">Why Passphrases?</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/wordlist.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
