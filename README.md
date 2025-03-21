@@ -69,10 +69,7 @@ Passphrases offer several advantages over traditional passwords:
 
 ## How to Use
 
-1. Open the `index.html` file in a web browser.
-2. Select your grade level.
-3. Click the "Generate Passphrase" button to create a new passphrase.
-4. The generated passphrase will be displayed on the page.
+Visit passphrase.school to use this tool, or download it locally and just open index.html
 
 ## Development
 

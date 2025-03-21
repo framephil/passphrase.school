@@ -26,6 +26,13 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    position: relative; /* Fix for Safari */
+    max-width: 100%; /* Ensure no content exceeds viewport */
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -38,6 +45,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    overflow-wrap: break-word; /* Allow long words to break */
+    word-wrap: break-word; /* Legacy support */
 }
 
 /* Header Styles */
@@ -47,11 +56,14 @@ body {
     padding: 1.5rem 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
     margin-bottom: 2rem;
+    width: 100%;
+    overflow: hidden; /* Prevent header content overflow */
 }
 
 .header-container {
     text-align: center;
     padding: 0.5rem;
+    max-width: 100%;
 }
 
 .site-title {
@@ -59,12 +71,24 @@ body {
     font-weight: 700;
     letter-spacing: -0.5px;
     margin-bottom: 0.25rem;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
-.site-tagline {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    font-weight: 300;
+@media (max-width: 768px) {
+    .site-title {
+        font-size: 2rem; /* Smaller title on mobile */
+    }
+
+    .site-tagline {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-title {
+        font-size: 1.8rem; /* Even smaller on small screens */
+    }
 }
 
 /* Level Selection */
@@ -212,6 +236,7 @@ body {
 .result-container {
     display: flex;
     margin-bottom: 0.5rem;
+    width: 100%;
 }
 
 #passphraseResult {
@@ -228,10 +253,10 @@ body {
     transition: all 0.3s ease;
     cursor: pointer;
     overflow-x: auto; /* Allow horizontal scrolling for long passphrases */
-    /* Remove white-space: nowrap and text-overflow: ellipsis to allow wrapping */
+    word-break: break-word; /* Allow breaking at appropriate points */
+    max-width: 100%; /* Ensure it doesn't exceed container */
 }
 
-/* Add responsive font sizing for passphraseResult */
 @media (max-width: 768px) {
     #passphraseResult {
         font-size: 1.5rem; /* Smaller font on mobile */
@@ -483,6 +508,30 @@ input[disabled] {
     .passphrase-tips ul {
         columns: 1;
     }
+
+    .info-column {
+        padding: 1rem; /* Smaller padding on mobile */
+    }
+
+    .level-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .options-container {
+        flex-direction: column; /* Stack options on mobile */
+        align-items: center;
+    }
+
+    /* Fix for footer on mobile */
+    .footer-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .footer-divider {
+        display: none; /* Hide divider on mobile */
+    }
 }
 
 .educational-note {
@@ -651,4 +700,22 @@ input[disabled] {
     font-size: 1.1rem;
     vertical-align: middle;
     margin: 0 0.2rem;
+}
+
+/* Safari-specific fixes */
+@supports (-webkit-overflow-scrolling: touch) {
+    /* iOS Safari specific styles */
+    body {
+        -webkit-text-size-adjust: 100%; /* Prevent text size adjustments */
+    }
+
+    .container, 
+    .header-container,
+    .site-footer .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+        box-sizing: border-box;
+    }
 }
