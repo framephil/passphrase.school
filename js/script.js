@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
             case 'middle':
                 wordCount = 2; // Changed to 2 words for middle school
-                minWordLength = 5; // But ensure they're longer words (5+ chars)
+                minWordLength = 4; // But ensure they're longer words (5+ chars)
                 highlightColor = 'var(--middle-color)';
                 break;
             case 'high':
@@ -203,21 +203,56 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get words from the wordlist based on the selected level
         let words = window.getWordsByLevelCumulative(selectedLevel);
         
+        // Also get words ONLY from the current level to ensure we use at least one
+        let currentLevelWords = window.getWordsByLevel(selectedLevel);
+        
         // Filter words by length if needed (for middle school)
         if (minWordLength > 0) {
             words = words.filter(wordObj => wordObj.word.length >= minWordLength);
+            currentLevelWords = currentLevelWords.filter(wordObj => wordObj.word.length >= minWordLength);
         }
         
         // For elementary, explicitly prefer shorter words
         if (selectedLevel === 'elementary') {
             words = words.filter(wordObj => wordObj.level === 'elementary' && wordObj.word.length <= 5);
+            currentLevelWords = currentLevelWords.filter(wordObj => wordObj.word.length <= 5);
+        }
+        
+        // Make sure we have words from the current level
+        if (currentLevelWords.length === 0) {
+            currentLevelWords = words.filter(wordObj => wordObj.level === selectedLevel);
         }
         
         // Generate random words - with safeguards against unwanted combinations
         let passphrase = [];
         let usedWords = new Set();
         
-        // Keep generating words until we have enough unique words
+        // First, select one word from the current grade level
+        if (currentLevelWords.length > 0) {
+            let attempts = 0;
+            let selectedWord = '';
+            
+            // Try to find a suitable word from the current level
+            while (attempts < 10 && selectedWord === '') {
+                const randomIndex = Math.floor(Math.random() * currentLevelWords.length);
+                const candidateWord = currentLevelWords[randomIndex].word;
+                
+                // Skip if word is already used (shouldn't happen on first word)
+                if (usedWords.has(candidateWord)) {
+                    attempts++;
+                    continue;
+                }
+                
+                selectedWord = candidateWord;
+            }
+            
+            if (selectedWord !== '') {
+                passphrase.push(selectedWord);
+                usedWords.add(selectedWord);
+            }
+        }
+        
+        // Now fill the rest with words from the cumulative list
         while (passphrase.length < wordCount) {
             const randomIndex = Math.floor(Math.random() * words.length);
             const selectedWord = words[randomIndex].word;
@@ -477,21 +512,33 @@ document.addEventListener('DOMContentLoaded', function() {
     function generateRandomPassphraseForAnimation(wordCount, capitalization, separator) {
         let randomWords = [];
         const words = window.getWordsByLevelCumulative(selectedLevel);
+        const currentLevelWords = window.getWordsByLevel(selectedLevel);
         let digitCount = (selectedLevel === 'high' || selectedLevel === 'staff') ? 2 : 1;
         let minWordLength = (selectedLevel === 'middle') ? 5 : 0;
         
-        // Filter words by length if needed (for middle school)
+        // Filter words by length if needed
         let filteredWords = words;
+        let filteredCurrentLevelWords = currentLevelWords;
+        
         if (minWordLength > 0) {
             filteredWords = words.filter(wordObj => wordObj.word.length >= minWordLength);
+            filteredCurrentLevelWords = currentLevelWords.filter(wordObj => wordObj.word.length >= minWordLength);
         }
         
         // For elementary, explicitly prefer shorter words
         if (selectedLevel === 'elementary') {
             filteredWords = words.filter(wordObj => wordObj.level === 'elementary' && wordObj.word.length <= 5);
+            filteredCurrentLevelWords = currentLevelWords.filter(wordObj => wordObj.level === 'elementary' && wordObj.word.length <= 5);
         }
 
-        for (let i = 0; i < wordCount; i++) {
+        // First, add one word from the current level
+        if (filteredCurrentLevelWords.length > 0) {
+            const randomIndex = Math.floor(Math.random() * filteredCurrentLevelWords.length);
+            randomWords.push(filteredCurrentLevelWords[randomIndex].word);
+        }
+
+        // Fill the remaining words from the cumulative list
+        while (randomWords.length < wordCount) {
             const randomIndex = Math.floor(Math.random() * filteredWords.length);
             randomWords.push(filteredWords[randomIndex].word);
         }
