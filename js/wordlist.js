@@ -183,7 +183,6 @@ wordList = [
     // Food - Middle School
     {word: "apple", level: "middle"},
     {word: "banana", level: "middle"},
-    {word: "orange", level: "middle"},
     {word: "grape", level: "middle"},
     {word: "pizza", level: "middle"},
     {word: "cookie", level: "middle"},
@@ -229,7 +228,6 @@ wordList = [
     {word: "bell", level: "elementary"},
     {word: "art", level: "elementary"},
     {word: "hall", level: "elementary"},
-    {word: "bus", level: "elementary"},
     {word: "room", level: "elementary"},
     {word: "map", level: "elementary"},
     {word: "ball", level: "elementary"},
@@ -250,7 +248,6 @@ wordList = [
     {word: "exam", level: "middle"},
     
     // School - High School
-    {word: "curriculum", level: "high"},
     {word: "semester", level: "high"},
     {word: "graduation", level: "high"},
     {word: "biology", level: "high"},
@@ -365,7 +362,91 @@ wordList = [
     {word: "proficient", level: "staff"},
     {word: "distinguished", level: "staff"},
     {word: "commendable", level: "staff"},
-    {word: "exceptional", level: "staff"}
+    
+    // Nature - Elementary (short words)
+    {word: "sun", level: "elementary"},
+    {word: "moon", level: "elementary"},
+    {word: "star", level: "elementary"},
+    {word: "tree", level: "elementary"},
+    {word: "leaf", level: "elementary"},
+    {word: "rock", level: "elementary"},
+    {word: "rain", level: "elementary"},
+    {word: "snow", level: "elementary"},
+    {word: "hill", level: "elementary"},
+    {word: "seed", level: "elementary"},
+
+    // Nature - Middle School
+    {word: "forest", level: "middle"},
+    {word: "ocean", level: "middle"},
+    {word: "planet", level: "middle"},
+    {word: "mountain", level: "middle"},
+    {word: "garden", level: "middle"},
+    {word: "weather", level: "middle"},
+    {word: "climate", level: "middle"},
+    {word: "valley", level: "middle"},
+    {word: "canyon", level: "middle"},
+
+    // Transportation - Elementary (short words)
+    {word: "car", level: "elementary"},
+    {word: "bike", level: "elementary"},
+    {word: "boat", level: "elementary"},
+    {word: "ship", level: "elementary"},
+    {word: "train", level: "elementary"},
+    {word: "plane", level: "elementary"},
+    {word: "van", level: "elementary"},
+    {word: "bus", level: "elementary"},
+
+    // Sports - Middle School
+    {word: "soccer", level: "middle"},
+    {word: "baseball", level: "middle"},
+    {word: "football", level: "middle"},
+    {word: "tennis", level: "middle"},
+    {word: "hockey", level: "middle"},
+    {word: "basketball", level: "middle"},
+    {word: "swimming", level: "middle"},
+    {word: "running", level: "middle"},
+    {word: "jumping", level: "middle"},
+    {word: "skating", level: "middle"},
+
+    // Business - Staff
+    {word: "analytics", level: "staff"},
+    {word: "component", level: "staff"},
+    {word: "framework", level: "staff"},
+    {word: "structure", level: "staff"},
+    {word: "workflow", level: "staff"},
+    {word: "resource", level: "staff"},
+    {word: "integrate", level: "staff"},
+
+    // Education - Staff
+    {word: "pedagogy", level: "staff"},
+    {word: "cognition", level: "staff"},
+    {word: "curriculum", level: "staff"},
+    {word: "milestone", level: "staff"},
+    {word: "objective", level: "staff"},
+    {word: "benchmark", level: "staff"},
+    {word: "coherent", level: "staff"},
+    {word: "synthesis", level: "staff"},
+
+    // Science - High School
+    {word: "molecule", level: "high"},
+    {word: "electron", level: "high"},
+    {word: "element", level: "high"},
+    {word: "compound", level: "high"},
+    {word: "ecosystem", level: "high"},
+    {word: "theorem", level: "high"},
+    {word: "equation", level: "high"},
+    {word: "velocity", level: "high"},
+    {word: "genetics", level: "high"},
+
+    // Literature - High School
+    {word: "narrative", level: "high"},
+    {word: "metaphor", level: "high"},
+    {word: "symbolism", level: "high"},
+    {word: "character", level: "high"},
+    {word: "chapter", level: "high"},
+    {word: "poetry", level: "high"},
+    {word: "fiction", level: "high"},
+    {word: "essay", level: "high"}
 ];
 
 // Make the wordList available to other scripts
