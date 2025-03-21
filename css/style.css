@@ -311,9 +311,8 @@ body.theme-dark {
 
 /* Enhance the generating-animation class with a frosted glass effect */
 .generating-animation {
-    opacity: 0.85; /* Slightly more visible than before */
+    opacity: 0.70; /* Slightly transparent to match the glass effect */
     transition: all 0.3s ease; /* Smooth transition for all properties */
-    transform: scale(0.98); /* Subtle scale down during animation */
     position: relative;
 }
 
@@ -328,7 +327,7 @@ body.theme-dark {
     display: flex;
     justify-content: center;
     align-items: center;
-    filter: blur(3px);
+    filter: blur(5px);
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     color: inherit;
     font-size: inherit;
@@ -344,22 +343,7 @@ body.theme-dark {
     content: none;
 }
 
-/* Make the final reveal more impactful with these transitions */
-@keyframes reveal {
-    0% {
-        opacity: 0.85;
-        transform: scale(0.98);
-        filter: blur(3px); /* Start blurred to match the generating state */
-    }
-    30% {
-        filter: blur(1.5px); /* Gradually reduce blur */
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-        filter: blur(0); /* End with no blur */
-    }
-}
+
 
 .reveal-animation {
     animation: reveal 0.5s ease-out forwards; /* Slightly longer animation */
