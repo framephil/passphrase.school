@@ -233,15 +233,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return word.charAt(0).toUpperCase() + word.slice(1);
     }
     
-    // Generate a single safe number (avoiding potentially problematic numbers)
+    // Generate a single safe number (allowing all digits including 6 and 9)
     function generateSingleDigitNumber() {
-        let num;
-        do {
-            // Generate a single-digit number
-            num = Math.floor(Math.random() * 10);
-        } while (num === 6 || num === 9);  // Directly check for unsafe digits
-        
-        return num.toString(); // Ensure the number is a single character string
+        // Generate a single-digit number (0-9)
+        const num = Math.floor(Math.random() * 10);
+        return num.toString();
     }
 
     // Generate a safe two-digit number combination
@@ -250,15 +246,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let numberCombo;
         do {
-            // Generate two separate digits
-            let firstDigit, secondDigit;
-            do {
-                firstDigit = Math.floor(Math.random() * 10);
-            } while (firstDigit === 6 || firstDigit === 9);
-            
-            do {
-                secondDigit = Math.floor(Math.random() * 10);
-            } while (secondDigit === 6 || secondDigit === 9);
+            // Generate two random digits (0-9) without restrictions
+            const firstDigit = Math.floor(Math.random() * 10);
+            const secondDigit = Math.floor(Math.random() * 10);
             
             numberCombo = firstDigit.toString() + secondDigit.toString();
             // Check if the combination is in our unsafe list
