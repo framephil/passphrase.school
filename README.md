@@ -1,4 +1,4 @@
-# Passphrase Generator
+# Passphrase.school
 
 This project is a simple web application that generates passphrases using a K-12 appropriate word list. It is designed to help users create secure and memorable passphrases for their online accounts.
 
@@ -10,7 +10,7 @@ passphrase-generator
 ├── css
 │   └── style.css     # Styles for the HTML page
 ├── js
-│   ├── app.js        # Main JavaScript logic for generating passphrases
+│   ├── script.js        # Main JavaScript logic for generating passphrases
 │   └── wordlist.js   # Exports an array of K-12 appropriate words
 ├── .gitignore        # Specifies files to be ignored by Git
 └── README.md         # Documentation for the project
