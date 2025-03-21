@@ -54,7 +54,6 @@ wordList = [
     {word: "that", level: "elementary"},
     {word: "look", level: "elementary"},
     {word: "more", level: "elementary"},
-    {word: "come", level: "elementary"},
     {word: "made", level: "elementary"},
     {word: "may", level: "elementary"},
     {word: "part", level: "elementary"},
