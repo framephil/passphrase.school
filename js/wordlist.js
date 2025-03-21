@@ -578,7 +578,43 @@ wordList = [
     {word: "council", level: "staff"},
     {word: "provision", level: "staff"},
     {word: "accredit", level: "staff"},
-    {word: "tenure", level: "staff"}
+    {word: "tenure", level: "staff"},
+
+    // Video Game Characters - Elementary (shorter/simpler character names)
+    {word: "mario", level: "elementary"},
+    {word: "luigi", level: "elementary"},
+    {word: "yoshi", level: "elementary"},
+    {word: "peach", level: "elementary"},
+    {word: "toad", level: "elementary"},
+    {word: "kirby", level: "elementary"},
+    {word: "pichu", level: "elementary"},
+    
+    // Video Game Characters - Middle School
+    {word: "zelda", level: "middle"},
+    {word: "samus", level: "middle"},
+    {word: "donkey", level: "middle"},
+    {word: "bowser", level: "middle"},
+    {word: "wario", level: "middle"},
+    {word: "daisy", level: "middle"},
+    {word: "rosalina", level: "middle"},
+    {word: "pikachu", level: "middle"},
+    {word: "jigglypuff", level: "middle"},
+    
+    // Video Game Characters - High School
+    {word: "ganondorf", level: "high"},
+    {word: "metroid", level: "high"},
+    {word: "mewtwo", level: "high"},
+    {word: "charizard", level: "high"},
+    {word: "squirtle", level: "high"},
+    {word: "bulbasaur", level: "high"},
+    {word: "charmander", level: "high"},
+    {word: "lucario", level: "high"},
+    
+    // Video Game Franchises - Staff
+    {word: "pokemon", level: "staff"},
+    {word: "splatoon", level: "staff"},
+    {word: "starfox", level: "staff"},
+    {word: "fireemblem", level: "staff"}
 ];
 
 // Make the wordList available to other scripts
