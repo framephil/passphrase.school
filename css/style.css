@@ -1,5 +1,6 @@
 /* Base styles */
 :root {
+    /* Light theme variables */
     --primary-color: #3498db;
     --secondary-color: #2980b9;
     --accent-color: #f39c12;
@@ -10,14 +11,47 @@
     --warning-color: #f1c40f;
     --text-dark: #333;
     --text-light: #f9f9f9;
-    --border-radius: 5px;
-    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --bg-color: #f5f7fa;
+    --card-bg: #ffffff;
+    --border-color: #ddd;
     
     /* Level colors */
     --elementary-color: #27ae60;
     --middle-color: #3498db;
     --high-color: #9b59b6;
     --staff-color: #34495e;
+    
+    --border-radius: 5px;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+    --primary-color: #5fb0e5;
+    --secondary-color: #2374a8;
+    --accent-color: #f5b041;
+    --dark-color: #1a2530;
+    --light-color: #2c3e50;
+    --text-dark: #f0f0f0;
+    --text-light: #ffffff;
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --border-color: #444;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    
+    /* Special dark mode colors for header and UI elements */
+    --header-bg-start: #1a2a3a;
+    --header-bg-end: #2c3e50;
+    
+    /* Dark mode level colors with better contrast */
+    --elementary-color: #3cc27b;
+    --middle-color: #5fb0e5;
+    --high-color: #b57ecc;
+    --staff-color: #516b84;
+    
+    /* Link colors for dark mode */
+    --link-color: #8ab4f8;
+    --visited-link-color: #c58af9;
 }
 
 * {
@@ -37,7 +71,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
-    background-color: #f5f7fa;
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -60,10 +95,16 @@ body {
     overflow: hidden; /* Prevent header content overflow */
 }
 
+/* Dark mode specific header adjustment */
+[data-theme="dark"] .site-header {
+    background: linear-gradient(135deg, var(--header-bg-start), var(--header-bg-end));
+}
+
 .header-container {
     text-align: center;
     padding: 0.5rem;
     max-width: 100%;
+    position: relative;
 }
 
 .site-title {
@@ -155,12 +196,12 @@ body {
 
 /* Generator Styles */
 .generator-container {
-    background-color: white;
+    background-color: var(--card-bg);
     border-radius: var(--border-radius);
     padding: 2rem;
     box-shadow: var(--box-shadow);
     margin-bottom: 2rem;
-    transition: all 0.5s ease;
+    transition: all 0.5s ease, background-color 0.3s ease;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -245,10 +286,11 @@ body {
     padding: 20px;
     font-size: 2rem; /* Base font size */
     font-weight: 700; /* Make the font bolder */
-    border: 2px solid #ddd;
+    border: 2px solid var(--border-color);
     border-radius: var(--border-radius);
     font-family: 'Arial', sans-serif; /* Change to a sans-serif font */
-    background-color: #f9f9f9;
+    background-color: var(--light-color);
+    color: var(--text-dark);
     text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -420,13 +462,18 @@ input[disabled] {
 .education-section {
     background-color: var(--light-color);
     padding: 3rem 0;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--border-color);
 }
 
 .education-section h2 {
     text-align: center;
     margin-bottom: 2rem;
     color: var(--dark-color);
+}
+
+/* Fix the h2 heading in dark mode to ensure better contrast */
+[data-theme="dark"] .education-section h2 {
+    color: var(--text-light);  /* Use light text color for better visibility */
 }
 
 .info-columns {
@@ -437,7 +484,7 @@ input[disabled] {
 }
 
 .info-column {
-    background-color: white;
+    background-color: var(--card-bg);
     padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
@@ -450,12 +497,18 @@ input[disabled] {
     padding-bottom: 0.5rem;
 }
 
+/* Fix contrast for info column headings in dark mode */
+[data-theme="dark"] .info-column h3 {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
 .info-column ul {
     padding-left: 1.5rem;
 }
 
 .passphrase-tips {
-    background-color: white;
+    background-color: var(--card-bg);
     padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
@@ -540,6 +593,12 @@ input[disabled] {
     padding: 1.5rem;
     border-radius: var(--border-radius);
     text-align: center;
+}
+
+/* Fix educational notes text contrast in dark mode */
+[data-theme="dark"] .educational-note {
+    background-color: var(--header-bg-end);
+    color: var(--text-light);
 }
 
 /* Educational note link styling */
@@ -696,6 +755,11 @@ input[disabled] {
     opacity: 0.8;
 }
 
+/* Fix browser compatibility notice in dark mode */
+[data-theme="dark"] .browser-compatibility {
+    color: #bbb;
+}
+
 .browser-compatibility i {
     font-size: 1.1rem;
     vertical-align: middle;
@@ -718,4 +782,122 @@ input[disabled] {
         padding-right: 15px;
         box-sizing: border-box;
     }
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#theme-toggle-light-icon {
+    display: none;
+}
+
+[data-theme="dark"] #theme-toggle-light-icon {
+    display: block;
+}
+
+[data-theme="dark"] #theme-toggle-dark-icon {
+    display: none;
+}
+
+/* Fix link colors for dark mode */
+[data-theme="dark"] a {
+    color: var(--link-color);
+}
+
+[data-theme="dark"] a:visited {
+    color: var(--link-color); /* Keep links consistent in dark mode */
+}
+
+/* Fix passphraseResult contrast for dark mode */
+[data-theme="dark"] #passphraseResult {
+    background-color: #2c3e50;
+    color: var(--text-light);
+    border-color: #3a5472;
+}
+
+/* Fix animation colors for dark mode */
+[data-theme="dark"] @keyframes highlight {
+    0% {
+        background-color: #2c3e50;
+    }
+    20% {
+        background-color: rgba(95, 176, 229, 0.3);
+    }
+    100% {
+        background-color: #2c3e50;
+    }
+}
+
+[data-theme="dark"] @keyframes copied {
+    0% {
+        background-color: #2c3e50;
+    }
+    50% {
+        background-color: rgba(60, 194, 123, 0.3);
+    }
+    100% {
+        background-color: #2c3e50;
+    }
+}
+
+[data-theme="dark"] .highlight-animation {
+    animation: highlight 1.5s ease;
+}
+
+[data-theme="dark"] .copied-animation {
+    animation: copied 1s ease;
+}
+
+/* Fix the copy instructions color for dark mode */
+[data-theme="dark"] .copy-instructions {
+    color: #aaaaaa;
+}
+
+/* Fix option toggle text color in dark mode */
+[data-theme="dark"] .options-toggle {
+    color: var(--primary-color);
+}
+
+/* Fix step-selection heading color in dark mode */
+[data-theme="dark"] .step-selection h2 {
+    color: var(--text-light);
+}
+
+/* Additional dark mode specific adjustments */
+[data-theme="dark"] input,
+[data-theme="dark"] select {
+    background-color: #333;
+    color: var(--text-light);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] select option {
+    background-color: #333;
+    color: var(--text-light);
+}
+
+/* Don't dim text in options */
+[data-theme="dark"] label {
+    color: var(--text-light);
 }
