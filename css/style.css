@@ -231,7 +231,7 @@ body.theme-dark {
     box-shadow: var(--box-shadow);
     margin-bottom: 2rem;
     transition: all 0.5s ease, background-color 0.3s ease;
-    max-width: 800px;
+    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -307,6 +307,62 @@ body.theme-dark {
 .generating-animation {
     opacity: 0.7; /* Make text slightly translucent during generation */
     transition: opacity 0.3s ease;
+}
+
+/* Enhance the generating-animation class with a frosted glass effect */
+.generating-animation {
+    opacity: 0.85; /* Slightly more visible than before */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    transform: scale(0.98); /* Subtle scale down during animation */
+    position: relative;
+}
+
+/* Apply blur only to the text content, not the container */
+.generating-animation::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: blur(3px);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.generating-animation span {
+    opacity: 0; /* Hide the actual text when animation is running */
+}
+
+/* Remove the backdrop filter from the container */
+#passphraseResult::before {
+    content: none;
+}
+
+/* Make the final reveal more impactful with these transitions */
+@keyframes reveal {
+    0% {
+        opacity: 0.85;
+        transform: scale(0.98);
+        filter: blur(3px); /* Start blurred to match the generating state */
+    }
+    30% {
+        filter: blur(1.5px); /* Gradually reduce blur */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0); /* End with no blur */
+    }
+}
+
+.reveal-animation {
+    animation: reveal 0.5s ease-out forwards; /* Slightly longer animation */
 }
 
 .result-container {

@@ -439,30 +439,62 @@ document.addEventListener('DOMContentLoaded', function() {
         const iterations = animationDuration / intervalDuration;
         let currentIteration = 0;
 
-        // Add translucent effect during animation
+        // Wrap text content in a span for better control
+        passphraseResult.innerHTML = '<span></span>';
+        const textSpan = passphraseResult.querySelector('span');
+        
+        // Add frosted glass effect during animation
         passphraseResult.classList.add('generating-animation');
 
         const interval = setInterval(() => {
             if (currentIteration >= iterations) {
                 clearInterval(interval);
-                // Update the textContent instead of value
-                passphraseResult.textContent = finalPassphrase;
+                
+                // For the final reveal, keep the data-text attribute with the final text
+                // but don't remove the generating-animation class yet
+                passphraseResult.setAttribute('data-text', finalPassphrase);
+                
+                // Update the span text (which remains hidden until animation completes)
+                textSpan.textContent = finalPassphrase;
+                
+                // Set the highlight color
                 passphraseResult.style.setProperty('--highlight-color', highlightColor);
                 
-                // Remove translucent effect when animation completes
-                passphraseResult.classList.remove('generating-animation');
-                
-                passphraseResult.classList.add('grow-shrink-animation');
-                
-                // Check and adjust font size if needed
-                adjustPassphraseSize();
-                
+                // Use a slight delay before showing the final passphrase
                 setTimeout(() => {
-                    passphraseResult.classList.remove('grow-shrink-animation');
-                }, 500);
+                    // Now remove the generating class to reveal the text
+                    passphraseResult.classList.remove('generating-animation');
+                    
+                    // Replace with final text directly (no more spans needed)
+                    passphraseResult.innerHTML = finalPassphrase;
+                    
+                    // Add reveal animation
+                    passphraseResult.classList.add('reveal-animation');
+                    
+                    // Add grow-shrink animation after reveal
+                    setTimeout(() => {
+                        passphraseResult.classList.remove('reveal-animation');
+                        passphraseResult.classList.add('grow-shrink-animation');
+                        
+                        // Check and adjust font size if needed
+                        adjustPassphraseSize();
+                        
+                        setTimeout(() => {
+                            passphraseResult.classList.remove('grow-shrink-animation');
+                        }, 500);
+                    }, 400);
+                }, 200); // 200ms delay to observe final blurred state
+                
             } else {
-                // Update the textContent instead of value
-                passphraseResult.textContent = generateRandomPassphraseForAnimation(wordCount, capitalization, separator);
+                // Generate the random text for animation
+                const randomText = generateRandomPassphraseForAnimation(wordCount, capitalization, separator);
+                
+                // Update the text content in the span
+                textSpan.textContent = randomText;
+                
+                // Also set the data-text attribute for the ::after pseudo-element
+                passphraseResult.setAttribute('data-text', randomText);
+                
                 currentIteration++;
             }
         }, intervalDuration);
