@@ -851,6 +851,22 @@ input[disabled] {
     transition: background-color 0.3s ease;
 }
 
+/* Reposition theme toggle on mobile */
+@media (max-width: 768px) {
+    .theme-toggle {
+        position: static; /* Remove absolute positioning on mobile */
+        margin: 1rem auto 0; /* Add some space above and center horizontally */
+        background-color: rgba(255, 255, 255, 0.1); /* Slight background for better visibility */
+    }
+    
+    /* Ensure proper layout in header container for mobile */
+    .header-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 .theme-toggle:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
