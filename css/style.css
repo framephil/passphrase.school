@@ -450,12 +450,58 @@ input[disabled] {
     columns: 2;
 }
 
+.why-we-made-this h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.why-we-made-this p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.why-we-made-this p:last-child {
+    margin-bottom: 0;
+}
+
+.github-thanks {
+    font-weight: 600;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.github-thanks i {
+    color: var(--dark-color);
+    margin: 0 0.3rem;
+    font-size: 1.3rem; /* Size adjustment for Remix Icon */
+    vertical-align: middle; 
+}
+
+@media (max-width: 768px) {
+    .passphrase-tips ul {
+        columns: 1;
+    }
+}
+
 .educational-note {
     background-color: var(--primary-color);
     color: white;
     padding: 1.5rem;
     border-radius: var(--border-radius);
     text-align: center;
+}
+
+/* Educational note link styling */
+.educational-note a {
+    color: var(--text-light); /* Same color as the text */
+    text-decoration: underline; /* Keep underline */
+}
+
+.educational-note a:hover {
+    opacity: 0.9; /* Slight fade effect on hover */
 }
 
 /* Footer Styles */
@@ -468,16 +514,40 @@ input[disabled] {
 
 .footer-links {
     margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .footer-links a {
-    color: var(--accent-color);
-    text-decoration: none;
-    margin: 0 10px;
+    color: var(--text-light); /* Same color as text */
+    text-decoration: underline; /* Add underline */
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.footer-links a:hover {
-    text-decoration: underline;
+.footer-links a i {
+    font-size: 1.2rem; /* Size adjustment for Remix Icon */
+}
+
+.footer-divider {
+    color: var(--text-light);
+    opacity: 0.6;
+}
+
+.heart {
+    color: var(--danger-color);
+    display: inline-block;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 /* Responsive adjustments */
@@ -569,4 +639,17 @@ input[disabled] {
 
 .level-disclaimer[data-level="staff"] {
     background-color: var(--staff-color);
+}
+
+/* Browser compatibility notice */
+.browser-compatibility {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.browser-compatibility i {
+    font-size: 1.1rem;
+    vertical-align: middle;
+    margin: 0 0.2rem;
 }
