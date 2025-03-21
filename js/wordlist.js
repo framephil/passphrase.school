@@ -138,8 +138,6 @@ wordList = [
     {word: "blue", level: "elementary"},
     {word: "green", level: "elementary"},
     {word: "pink", level: "elementary"},
-    {word: "black", level: "elementary"},
-    {word: "white", level: "elementary"},
     {word: "gray", level: "elementary"},
     
     // Colors - Middle School

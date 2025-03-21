@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passphrase.school API</title>
+    <!-- Include the same favicon setup -->
+    <link rel="icon" href="favicon/favicon.ico" sizes="any">
+    <link rel="icon" href="favicon/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="favicon/apple-touch-icon.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        pre {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Monaco, Consolas, "Andale Mono", monospace;
+        }
+        h1, h2, h3 {
+            color: #2980b9;
+        }
+        .result-container {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        #apiResult {
+            white-space: pre-wrap;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #3498db;
+        }
+        .back-link {
+            margin-top: 20px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="api-docs">
+        <h1>Passphrase.school API</h1>
+        
+        <div id="result-section" style="display:none;">
+            <h2>Generated Passphrase:</h2>
+            <div class="result-container">
+                <div id="apiResult"></div>
+            </div>
+        </div>
+
+        <h2>API Documentation</h2>
+        <p>This API allows you to generate passphrases programmatically. Since this is hosted on GitHub Pages, 
+           the API works by accessing this page with query parameters.</p>
+        
+        <h3>Usage</h3>
+        <pre><code>https://passphrase.school/api.html?level=middle&separator=dash&capitalization=random&rawResponse=true</code></pre>
+        
+        <h3>Parameters</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+                <th>Values</th>
+                <th>Default</th>
+            </tr>
+            <tr>
+                <td>level</td>
+                <td>Educational level</td>
+                <td>elementary, middle, high, staff</td>
+                <td>middle</td>
+            </tr>
+            <tr>
+                <td>separator</td>
+                <td>Character between words</td>
+                <td>space, dash, period, underscore</td>
+                <td>space</td>
+            </tr>
+            <tr>
+                <td>capitalization</td>
+                <td>Style of capitalization</td>
+                <td>first, none, all, random</td>
+                <td>first</td>
+            </tr>
+            <tr>
+                <td>format</td>
+                <td>Response format</td>
+                <td>json, text</td>
+                <td>json</td>
+            </tr>
+            <tr>
+                <td>rawResponse</td>
+                <td>Return only the raw data (for API clients)</td>
+                <td>true, false</td>
+                <td>false</td>
+            </tr>
+        </table>
+
+        <h3>Response Example (JSON)</h3>
+        <pre><code>{
+  "passphrase": "Smile-potato-network45",
+  "level": "high",
+  "wordCount": 3,
+  "separator": "-"
+}</code></pre>
+
+        <h3>Try it:</h3>
+        <ul>
+            <li><a href="api.html?level=elementary&format=json">Elementary Level</a></li>
+            <li><a href="api.html?level=middle&separator=dash&format=json">Middle Level with dash separator</a></li>
+            <li><a href="api.html?level=high&capitalization=all&format=json">High School Level with all words capitalized</a></li>
+            <li><a href="api.html?level=staff&separator=underscore&capitalization=random&format=json">Staff Level with underscore and random capitalization</a></li>
+            <li><a href="api.html?level=middle&format=text">Text-only response for Middle Level</a></li>
+        </ul>
+        
+        <a href="index.html" class="back-link">← Back to Passphrase Generator</a>
+    </div>
+
+    <!-- Include the word list and API functionality -->
+    <script src="js/wordlist.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Parse URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Check if this is an API request (using User-Agent or explicit parameter)
+            const rawResponseParam = urlParams.get('rawResponse') || '';
+            const isApiRequest = 
+                rawResponseParam.toLowerCase() === 'true' ||
+                navigator.userAgent.includes('curl') ||
+                navigator.userAgent.includes('wget') ||
+                navigator.userAgent.includes('insomnia') ||
+                navigator.userAgent.includes('postman');
+                
+            // Only proceed if parameters are provided
+            if (urlParams.toString()) {
+                // Extract parameters with defaults
+                const level = urlParams.get('level') || 'middle';
+                const separatorInput = urlParams.get('separator') || 'space';
+                const capitalization = urlParams.get('capitalization') || 'first';
+                const format = urlParams.get('format') || 'json';
+                
+                // Map separator input to actual character
+                const separatorMap = {
+                    'space': ' ',
+                    'dash': '-',
+                    'hyphen': '-',
+                    'period': '.',
+                    'dot': '.',
+                    'underscore': '_'
+                };
+                
+                const separator = separatorMap[separatorInput.toLowerCase()] || ' ';
+                
+                // Generate passphrase
+                const result = generatePassphrase(level, separator, capitalization);
+                
+                // Create response object
+                const response = {
+                    passphrase: result.passphrase,
+                    level: level,
+                    wordCount: result.wordCount,
+                    separator: separatorInput
+                };
+                
+                // If this is an API request, return only the response
+                if (isApiRequest) {
+                    // Clear the page
+                    document.body.innerHTML = '';
+                    document.title = 'API Response';
+                    
+                    // Return just the raw data based on format
+                    if (format.toLowerCase() === 'json') {
+                        document.write('<pre>' + JSON.stringify(response, null, 2) + '</pre>');
+                    } else {
+                        document.write(result.passphrase);
+                    }
+                    
+                    // Stop further processing
+                    return;
+                }
+                
+                // For browser viewing, show the formatted result in the page
+                document.getElementById('result-section').style.display = 'block';
+                
+                // Format and display response
+                if (format.toLowerCase() === 'json') {
+                    document.getElementById('apiResult').textContent = JSON.stringify(response, null, 2);
+                } else {
+                    document.getElementById('apiResult').textContent = result.passphrase;
+                }
+            }
+        });
+        
+        // Generate passphrase function
+        function generatePassphrase(level, separator, capitalization) {
+            // Define parameters based on level
+            let wordCount;
+            let digitCount = 1;
+            let minWordLength = 0;
+            
+            switch(level) {
+                case 'elementary':
+                    wordCount = 2;
+                    minWordLength = 0;
+                    break;
+                case 'middle':
+                    wordCount = 2;
+                    minWordLength = 5;
+                    break;
+                case 'high':
+                    wordCount = 3;
+                    digitCount = 2;
+                    break;
+                case 'staff':
+                    wordCount = 4;
+                    digitCount = 2;
+                    break;
+                default:
+                    wordCount = 2;
+                    break;
+            }
+            
+            // Get words from the wordlist based on the selected level
+            let words = window.getWordsByLevelCumulative(level);
+            
+            // Filter words by length if needed (for middle school)
+            if (minWordLength > 0) {
+                words = words.filter(wordObj => wordObj.word.length >= minWordLength);
+            }
+            
+            // For elementary, explicitly prefer shorter words
+            if (level === 'elementary') {
+                words = words.filter(wordObj => wordObj.level === 'elementary' && wordObj.word.length <= 5);
+            }
+            
+            // Generate random words - with safeguards against unwanted combinations
+            let passphrase = [];
+            let usedWords = new Set();
+            
+            // Keep generating words until we have enough unique words
+            while (passphrase.length < wordCount) {
+                const randomIndex = Math.floor(Math.random() * words.length);
+                const selectedWord = words[randomIndex].word;
+                
+                // Skip if word is already used
+                if (usedWords.has(selectedWord)) continue;
+                
+                // Skip inappropriate combinations
+                if (passphrase.length > 0) {
+                    const lastWord = passphrase[passphrase.length - 1];
+                    if (window.isBadCombination(lastWord, selectedWord)) continue;
+                }
+                
+                passphrase.push(selectedWord);
+                usedWords.add(selectedWord);
+            }
+            
+            // Apply capitalization based on the selected option
+            switch (capitalization) {
+                case 'first':
+                    passphrase[0] = capitalizeWord(passphrase[0]);
+                    for (let i = 1; i < passphrase.length; i++) {
+                        passphrase[i] = passphrase[i].toLowerCase();
+                    }
+                    break;
+                case 'none':
+                    passphrase = passphrase.map(word => word.toLowerCase());
+                    break;
+                case 'all':
+                    passphrase = passphrase.map(word => capitalizeWord(word));
+                    break;
+                case 'random':
+                    passphrase = passphrase.map(word => word.toLowerCase());
+                    const randomIndex = Math.floor(Math.random() * passphrase.length);
+                    passphrase[randomIndex] = capitalizeWord(passphrase[randomIndex]);
+                    break;
+                default:
+                    passphrase[0] = capitalizeWord(passphrase[0]);
+                    break;
+            }
+            
+            // Join with the selected separator
+            let result = passphrase.join(separator);
+            
+            // Add random digits based on level
+            if (digitCount === 1) {
+                result += generateSingleDigitNumber();
+            } else {
+                result += generateSafeNumberCombination();
+            }
+            
+            return {
+                passphrase: result,
+                wordCount: wordCount
+            };
+        }
+        
+        // Helper functions (simplified versions from script.js)
+        function capitalizeWord(word) {
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        }
+        
+        function generateSingleDigitNumber() {
+            const num = Math.floor(Math.random() * 10);
+            return num.toString();
+        }
+        
+        function generateSafeNumberCombination() {
+            const unsafeCombinations = ['69', '96', '13', '666', '420', '123', '911', '666', '88'];
+            
+            let numberCombo;
+            do {
+                const firstDigit = Math.floor(Math.random() * 10);
+                const secondDigit = Math.floor(Math.random() * 10);
+                numberCombo = firstDigit.toString() + secondDigit.toString();
+            } while (unsafeCombinations.includes(numberCombo));
+            
+            return numberCombo;
+        }
+    </script>
+</body>
+</html>

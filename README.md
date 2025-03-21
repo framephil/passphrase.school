@@ -89,6 +89,6 @@ Created by Phillip Winfrey with a lot of help from GitHub Copilot.
 
 ## API Usage
 
-Passphrase.school provides a simple API that allows you to generate passphrases programmatically via GET requests.
+Passphrase.school provides a simple API that allows you to generate passphrases programmatically via URL parameters.
 
 ### API Endpoint

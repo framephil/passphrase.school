@@ -964,3 +964,80 @@ input[disabled] {
 [data-theme="dark"] label {
     color: var(--text-light);
 }
+
+/* API Section Styles */
+.api-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.api-section h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.api-example {
+    margin: 1.5rem 0;
+    background-color: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--accent-color);
+}
+
+.api-example h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.api-example pre {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+    margin-bottom: 1rem;
+}
+
+.api-example code {
+    font-family: 'Consolas', 'Monaco', monospace;
+    word-wrap: break-word;
+}
+
+.api-cta {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-api {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white !important;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-api:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-api i {
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+/* Dark mode specific fixes for API section */
+[data-theme="dark"] .api-example {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .api-example pre {
+    background-color: rgba(0, 0, 0, 0.3);
+}
