@@ -58,7 +58,8 @@
 
         <div class="generator-container hidden" id="generator">
             <div class="result-container">
-                <input type="text" id="passphraseResult" readonly title="Click to copy to clipboard">
+                <!-- Replace input with div -->
+                <div id="passphraseResult" tabindex="0" title="Click to copy to clipboard"></div>
             </div>
             
             <div class="copy-instructions">
@@ -82,6 +83,7 @@
                                 <option value="-">Hyphen (-)</option>
                                 <option value=".">Period (.)</option>
                                 <option value="_">Underscore (_)</option>
+                                <option value="random">Random Mix</option>
                             </select>
                         </div>
                         <div class="option-group">
@@ -92,6 +94,17 @@
                                 <option value="all">All words</option>
                                 <option value="random">Random word</option>
                             </select>
+                        </div>
+                        <div class="option-group">
+                            <label for="numberPlacement">Number placement:</label>
+                            <select id="numberPlacement">
+                                <option value="end" selected>End of phrase</option>
+                                <option value="random">Random position</option>
+                            </select>
+                        </div>
+                        <div class="option-group checkbox-option">
+                            <input type="checkbox" id="disableAnimations">
+                            <label for="disableAnimations">Disable animations</label>
                         </div>
                     </div>
                 </div>

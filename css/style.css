@@ -303,6 +303,12 @@ body.theme-dark {
     animation: growShrink 0.5s ease;
 }
 
+/* Add a new animation class for the generating state */
+.generating-animation {
+    opacity: 0.7; /* Make text slightly translucent during generation */
+    transition: opacity 0.3s ease;
+}
+
 .result-container {
     display: flex;
     margin-bottom: 0.5rem;
@@ -313,30 +319,79 @@ body.theme-dark {
     flex-grow: 1;
     width: 100%;
     padding: 20px;
-    font-size: 2rem; /* Base font size */
-    font-weight: 700; /* Make the font bolder */
+    font-size: 2.5rem; /* Base large size */
+    font-weight: 700;
     border: 2px solid var(--border-color);
     border-radius: var(--border-radius);
-    font-family: 'Arial', sans-serif; /* Change to a sans-serif font */
+    font-family: 'Arial', sans-serif;
     background-color: var(--light-color);
     color: var(--text-dark);
     text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
-    overflow-x: auto; /* Allow horizontal scrolling for long passphrases */
-    word-break: break-word; /* Allow breaking at appropriate points */
-    max-width: 100%; /* Ensure it doesn't exceed container */
+    
+    /* Height properties for auto-expanding content */
+    min-height: 100px;
+    height: auto;
+    
+    /* Improved text handling properties - prevent hyphenation */
+    overflow-wrap: break-word; /* Allow long words to break */
+    word-break: break-word; /* Modern browsers: break at appropriate points */
+    hyphens: none; /* Disable hyphenation to prevent splitting words with hyphens */
+    
+    /* Layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Make it focusable with keyboard */
+    outline: none;
+    
+    /* Add padding and box sizing to help with text containment */
+    box-sizing: border-box;
+    
+    /* New: Add a max-height and adapt font size */
+    max-height: 200px; /* Set a reasonable max height */
+}
+
+/* Add a class that will be applied when text is too large */
+#passphraseResult.smaller-text {
+    font-size: 2rem;
+}
+
+#passphraseResult.smallest-text {
+    font-size: 1.6rem;
 }
 
 @media (max-width: 768px) {
     #passphraseResult {
-        font-size: 1.5rem; /* Smaller font on mobile */
+        font-size: 2.2rem;
+        padding: 15px;
+        line-height: 1.2;
+    }
+    
+    #passphraseResult.smaller-text {
+        font-size: 1.8rem;
+    }
+    
+    #passphraseResult.smallest-text {
+        font-size: 1.5rem;
     }
 }
 
 @media (max-width: 480px) {
     #passphraseResult {
-        font-size: 1.2rem; /* Even smaller font on very small screens */
+        font-size: 1.8rem;
+        padding: 12px;
+        min-height: 80px;
+    }
+    
+    #passphraseResult.smaller-text {
+        font-size: 1.5rem;
+    }
+    
+    #passphraseResult.smallest-text {
+        font-size: 1.2rem;
     }
 }
 
@@ -347,6 +402,7 @@ body.theme-dark {
 
 #passphraseResult:focus {
     border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
     outline: none;
 }
 
@@ -446,7 +502,7 @@ body.theme-dark {
 }
 
 .options-panel.visible {
-    max-height: 300px; /* Adjust this value as needed */
+    max-height: 400px; /* Increased from 300px to fit more options */
 }
 
 .options-panel.hidden {
@@ -485,6 +541,23 @@ input[disabled] {
     font-size: 0.8rem;
     color: #777;
     margin-top: 4px;
+}
+
+/* Add styles for the checkbox option */
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-option input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.checkbox-option label {
+    margin: 0;
+    cursor: pointer;
 }
 
 /* Education Section */
@@ -603,6 +676,11 @@ input[disabled] {
     .options-container {
         flex-direction: column; /* Stack options on mobile */
         align-items: center;
+        gap: 1rem;
+    }
+
+    .option-group {
+        width: 100%;
     }
 
     /* Fix for footer on mobile */

@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const optionsPanel = document.getElementById('optionsPanel');
     const optionsToggle = document.getElementById('optionsToggle');
     const capitalizationSelect = document.getElementById('capitalization');
+    const numberPlacementSelect = document.getElementById('numberPlacement');
+    const disableAnimationsCheckbox = document.getElementById('disableAnimations');
     
     // Store the selected complexity level
     let selectedLevel = 'middle'; // default to middle school
@@ -83,21 +85,27 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Copy passphrase to clipboard on click
     passphraseResult.addEventListener('click', function() {
-        if (this.value) {
-            // Store original value
-            const originalValue = this.value;
+        if (this.textContent) {
+            // Create a temporary textarea to copy from
+            const textarea = document.createElement('textarea');
+            textarea.value = this.textContent;
+            document.body.appendChild(textarea);
             
-            // Select the text for copying
-            this.select();
+            // Select and copy
+            textarea.select();
             document.execCommand('copy');
             
-            // Visual feedback - change text and add animation
+            // Remove the textarea
+            document.body.removeChild(textarea);
+            
+            // Visual feedback - store original content
+            const originalText = this.textContent;
             this.classList.add('copied-animation');
-            this.value = 'Copied to clipboard!';
+            this.textContent = 'Copied to clipboard!';
             
             // Restore original text after delay
             setTimeout(() => {
-                this.value = originalValue;
+                this.textContent = originalText;
                 this.classList.remove('copied-animation');
             }, 1500);
         }
@@ -105,8 +113,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Generate passphrase function
     function generatePassphrase() {
-        const separator = separatorSelect.value;
+        // Get all selected options
+        const separatorOption = separatorSelect.value;
         const capitalization = capitalizationSelect.value;
+        const numberPlacement = numberPlacementSelect ? numberPlacementSelect.value : 'end';
+        const disableAnimations = disableAnimationsCheckbox ? disableAnimationsCheckbox.checked : false;
         
         // Get appropriate word count based on level
         let wordCount;
@@ -205,16 +216,80 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
         }
         
-        // Join with the selected separator
-        let result = passphrase.join(separator);
+        // Apply separator(s)
+        let result;
         
-        // Add random digits based on level
-        if (digitCount === 1) {
-            // For elementary and middle: just add one safe digit
-            result += generateSingleDigitNumber();
+        // If random separator option is selected, apply different separators
+        if (separatorOption === 'random') {
+            const separators = [' ', '-', '.', '_']; // Available separators
+            result = '';
+            for (let i = 0; i < passphrase.length; i++) {
+                result += passphrase[i];
+                if (i < passphrase.length - 1) {
+                    // Select a random separator for each word
+                    const randSep = separators[Math.floor(Math.random() * separators.length)];
+                    result += randSep;
+                }
+            }
         } else {
-            // For high school and staff: add two digits that don't form unwanted combinations
-            result += generateSafeNumberCombination();
+            // Use the selected separator consistently
+            result = passphrase.join(separatorOption);
+        }
+        
+        // Generate the number(s) to add
+        let numberStr = '';
+        if (digitCount === 1) {
+            numberStr = generateSingleDigitNumber();
+        } else {
+            numberStr = generateSafeNumberCombination();
+        }
+        
+        // Add numbers based on placement option
+        if (numberPlacement === 'random' && passphrase.length > 0) {
+            // Insert numbers at a random position
+            const insertPosition = Math.floor(Math.random() * (passphrase.length + 1));
+            
+            // Split the result into parts
+            if (separatorOption === 'random') {
+                // For random separators, we need to rebuild using the passphrase array
+                let newResult = '';
+                const separators = [' ', '-', '.', '_'];
+                
+                for (let i = 0; i < passphrase.length; i++) {
+                    // Insert numbers if we're at the right position
+                    if (i === insertPosition) {
+                        newResult += numberStr;
+                        // Add a separator if not at the beginning
+                        if (i > 0) {
+                            newResult = newResult.slice(0, -1); // Remove the last separator
+                        }
+                        if (i < passphrase.length) {
+                            newResult += separators[Math.floor(Math.random() * separators.length)];
+                        }
+                    }
+                    
+                    newResult += passphrase[i];
+                    // Add a separator if not at the end
+                    if (i < passphrase.length - 1) {
+                        newResult += separators[Math.floor(Math.random() * separators.length)];
+                    }
+                }
+                
+                // If insertion point is at the end, add numbers
+                if (insertPosition === passphrase.length) {
+                    newResult += numberStr;
+                }
+                
+                result = newResult;
+            } else {
+                // For consistent separators, we can use the existing result string
+                const parts = result.split(separatorOption);
+                parts.splice(insertPosition, 0, numberStr);
+                result = parts.join(separatorOption);
+            }
+        } else {
+            // Default: add numbers at the end
+            result += numberStr;
         }
         
         // Ensure the passphrase meets the minimum length requirement
@@ -222,10 +297,13 @@ document.addEventListener('DOMContentLoaded', function() {
             result += generateSingleDigitNumber();
         }
         
-        // Remove the staff level word count check since character limits are no longer an issue
-        
-        // Display the passphrase with animation
-        animatePassphrase(result, highlightColor, wordCount, capitalization, separator);
+        // Display the passphrase with or without animation
+        if (disableAnimations) {
+            passphraseResult.textContent = result;
+            adjustPassphraseSize();
+        } else {
+            animatePassphrase(result, highlightColor, wordCount, capitalization, separatorOption);
+        }
     }
     
     // Function to capitalize the first letter of a word
@@ -257,6 +335,33 @@ document.addEventListener('DOMContentLoaded', function() {
         return numberCombo;
     }
 
+    // Function to adjust font size based on content
+    function adjustPassphraseSize() {
+        // Reset classes first
+        passphraseResult.classList.remove('smaller-text', 'smallest-text');
+        
+        // Check if the text is overflowing
+        const isOverflowing = passphraseResult.scrollWidth > passphraseResult.clientWidth ||
+                             passphraseResult.scrollHeight > passphraseResult.clientHeight;
+        
+        if (isOverflowing) {
+            // Try adding the smaller-text class first
+            passphraseResult.classList.add('smaller-text');
+            
+            // Check if it's still overflowing
+            setTimeout(() => {
+                const stillOverflowing = passphraseResult.scrollWidth > passphraseResult.clientWidth ||
+                                      passphraseResult.scrollHeight > passphraseResult.clientHeight;
+                
+                if (stillOverflowing) {
+                    // Try even smaller text
+                    passphraseResult.classList.remove('smaller-text');
+                    passphraseResult.classList.add('smallest-text');
+                }
+            }, 50);
+        }
+    }
+
     // Function to animate the passphrase
     function animatePassphrase(finalPassphrase, highlightColor, wordCount, capitalization, separator) {
         const animationDuration = 1000; // 1 second
@@ -264,17 +369,30 @@ document.addEventListener('DOMContentLoaded', function() {
         const iterations = animationDuration / intervalDuration;
         let currentIteration = 0;
 
+        // Add translucent effect during animation
+        passphraseResult.classList.add('generating-animation');
+
         const interval = setInterval(() => {
             if (currentIteration >= iterations) {
                 clearInterval(interval);
-                passphraseResult.value = finalPassphrase;
+                // Update the textContent instead of value
+                passphraseResult.textContent = finalPassphrase;
                 passphraseResult.style.setProperty('--highlight-color', highlightColor);
+                
+                // Remove translucent effect when animation completes
+                passphraseResult.classList.remove('generating-animation');
+                
                 passphraseResult.classList.add('grow-shrink-animation');
+                
+                // Check and adjust font size if needed
+                adjustPassphraseSize();
+                
                 setTimeout(() => {
                     passphraseResult.classList.remove('grow-shrink-animation');
                 }, 500);
             } else {
-                passphraseResult.value = generateRandomPassphraseForAnimation(wordCount, capitalization, separator);
+                // Update the textContent instead of value
+                passphraseResult.textContent = generateRandomPassphraseForAnimation(wordCount, capitalization, separator);
                 currentIteration++;
             }
         }, intervalDuration);
@@ -327,24 +445,57 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
         }
 
-        let result = randomWords.join(separator);
-        
-        // Add digits based on level
-        if (digitCount === 1) {
-            // For elementary and middle: just add one safe digit
-            result += generateSingleDigitNumber();
+        // Update to handle random separators
+        let result;
+        if (separator === 'random') {
+            const separators = [' ', '-', '.', '_'];
+            result = '';
+            for (let i = 0; i < randomWords.length; i++) {
+                result += randomWords[i];
+                if (i < randomWords.length - 1) {
+                    const randSep = separators[Math.floor(Math.random() * separators.length)];
+                    result += randSep;
+                }
+            }
         } else {
-            // For high school and staff: add two digits that don't form unwanted combinations
-            result += generateSafeNumberCombination();
+            result = randomWords.join(separator);
         }
-
-        // Ensure the passphrase meets the minimum length requirement
+        
+        // Update to handle random number placement
+        const numberPlacement = numberPlacementSelect ? numberPlacementSelect.value : 'end';
+        let digits = '';
+        
+        if (digitCount === 1) {
+            digits = generateSingleDigitNumber();
+        } else {
+            digits = generateSafeNumberCombination();
+        }
+        
+        if (numberPlacement === 'random' && randomWords.length > 0) {
+            const insertPosition = Math.floor(Math.random() * (randomWords.length + 1));
+            
+            if (separator === 'random') {
+                // Similar logic as in the main function for random separators
+                // ...simplified for animation...
+                const randomPosition = Math.floor(Math.random() * (result.length + 1));
+                result = result.slice(0, randomPosition) + digits + result.slice(randomPosition);
+            } else {
+                const parts = result.split(separator);
+                parts.splice(insertPosition, 0, digits);
+                result = parts.join(separator);
+            }
+        } else {
+            result += digits;
+        }
+        
+        // Ensure minimum length
         while (result.length < 8) {
             result += generateSingleDigitNumber();
         }
         
-        // Remove the staff level word count enforcement for animation
-        
         return result;
     }
+
+    // Also adjust size after window resize
+    window.addEventListener('resize', adjustPassphraseSize);
 });
