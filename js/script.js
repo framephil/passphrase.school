@@ -45,37 +45,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 generatorContainer.classList.add('slide-in');
             }, 50);
             
-            // Update word count based on level
-            if (wordCountInput) {
-                updateWordCountByLevel(selectedLevel);
-            }
-            
             // Generate a passphrase immediately upon level selection
             generatePassphrase();
         });
     });
-    
-    // Update word count input based on educational level
-    function updateWordCountByLevel(level) {
-        if (wordCountInput) {
-            switch(level) {
-                case 'elementary':
-                    wordCountInput.value = 2;
-                    break;
-                case 'middle':
-                    wordCountInput.value = 3;
-                    break;
-                case 'high':
-                    wordCountInput.value = 3;
-                    break;
-                case 'staff':
-                    wordCountInput.value = 4;
-                    break;
-                default:
-                    wordCountInput.value = 3;
-            }
-        }
-    }
     
     // Generate passphrase when the button is clicked
     generateBtn.addEventListener('click', generatePassphrase);
