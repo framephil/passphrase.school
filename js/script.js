@@ -132,13 +132,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 digitCount = 2; // High school gets 2 digits
                 break;
             case 'staff':
-                wordCount = 4;
+                wordCount = 4; // Ensure staff always gets 4 words
                 highlightColor = 'var(--staff-color)';
                 digitCount = 2; // Staff gets 2 digits
                 break;
             default:
                 wordCount = 3;
                 highlightColor = 'var(--primary-color)';
+        }
+        
+        // Update the word count in the input if it exists
+        if (wordCountInput) {
+            wordCountInput.value = wordCount;
         }
         
         // Get words from the wordlist based on the selected level
@@ -180,6 +185,10 @@ document.addEventListener('DOMContentLoaded', function() {
         switch (capitalization) {
             case 'first':
                 passphrase[0] = capitalizeWord(passphrase[0]);
+                // Make sure all other words are lowercase
+                for (let i = 1; i < passphrase.length; i++) {
+                    passphrase[i] = passphrase[i].toLowerCase();
+                }
                 break;
             case 'none':
                 passphrase = passphrase.map(word => word.toLowerCase());
@@ -188,6 +197,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 passphrase = passphrase.map(word => capitalizeWord(word));
                 break;
             case 'random':
+                // First make all words lowercase
+                passphrase = passphrase.map(word => word.toLowerCase());
+                // Then capitalize a random word
                 const randomIndex = Math.floor(Math.random() * passphrase.length);
                 passphrase[randomIndex] = capitalizeWord(passphrase[randomIndex]);
                 break;
@@ -210,26 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
             result += generateSingleDigitNumber();
         }
         
-        // Enforce maximum length of 30 characters
-        if (result.length > 30) {
-            // Try to shorten by removing words from the end
-            while (passphrase.length > 2 && result.length > 30) {
-                passphrase.pop();
-                result = passphrase.join(separator);
-                
-                // Re-add the digits
-                if (digitCount === 1) {
-                    result += generateSingleDigitNumber();
-                } else {
-                    result += generateSafeNumberCombination();
-                }
-            }
-            
-            // If still too long, truncate to 30 characters
-            if (result.length > 30) {
-                result = result.substring(0, 30);
-            }
-        }
+        // Remove the staff level word count check since character limits are no longer an issue
         
         // Display the passphrase with animation
         animatePassphrase(result, highlightColor, wordCount, capitalization, separator);
@@ -324,6 +317,10 @@ document.addEventListener('DOMContentLoaded', function() {
         switch (capitalization) {
             case 'first':
                 randomWords[0] = capitalizeWord(randomWords[0]);
+                // Make sure all other words are lowercase
+                for (let i = 1; i < randomWords.length; i++) {
+                    randomWords[i] = randomWords[i].toLowerCase();
+                }
                 break;
             case 'none':
                 randomWords = randomWords.map(word => word.toLowerCase());
@@ -332,6 +329,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 randomWords = randomWords.map(word => capitalizeWord(word));
                 break;
             case 'random':
+                // First make all words lowercase
+                randomWords = randomWords.map(word => word.toLowerCase());
+                // Then capitalize a random word
                 const randomIndex = Math.floor(Math.random() * randomWords.length);
                 randomWords[randomIndex] = capitalizeWord(randomWords[randomIndex]);
                 break;
@@ -353,11 +353,8 @@ document.addEventListener('DOMContentLoaded', function() {
             result += generateSingleDigitNumber();
         }
         
-        // Apply 30-character limit
-        if (result.length > 30) {
-            result = result.substring(0, 30);
-        }
-
+        // Remove the staff level word count enforcement for animation
+        
         return result;
     }
 });

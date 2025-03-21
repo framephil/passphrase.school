@@ -227,9 +227,8 @@ body {
     text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
-    white-space: nowrap; /* Prevent wrapping */
-    overflow: hidden;    /* Hide overflow */
-    text-overflow: ellipsis; /* Show ellipsis for overflow text */
+    overflow-x: auto; /* Allow horizontal scrolling for long passphrases */
+    /* Remove white-space: nowrap and text-overflow: ellipsis to allow wrapping */
 }
 
 /* Add responsive font sizing for passphraseResult */

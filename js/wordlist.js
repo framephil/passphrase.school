@@ -99,7 +99,6 @@ wordList = [
     
     // Colors - Staff
     {word: "magenta", level: "staff"},
-    {word: "chartreuse", level: "staff"},
     {word: "periwinkle", level: "staff"},
     {word: "cerulean", level: "staff"},
     {word: "vermilion", level: "staff"},
@@ -114,7 +113,6 @@ wordList = [
     {word: "rice", level: "elementary"},
     {word: "meat", level: "elementary"},
     {word: "soup", level: "elementary"},
-    {word: "fish", level: "elementary"},
     
     // Food - Middle School
     {word: "apple", level: "middle"},
@@ -135,12 +133,10 @@ wordList = [
     {word: "muffin", level: "middle"},
     {word: "donut", level: "middle"},
     {word: "berry", level: "middle"},
-    {word: "melon", level: "middle"},
     
     // Food - High School
     {word: "cuisine", level: "high"},
     {word: "nutrition", level: "high"},
-    {word: "appetizer", level: "high"},
     {word: "dessert", level: "high"},
     {word: "protein", level: "high"},
     {word: "vitamin", level: "high"},
@@ -154,6 +150,7 @@ wordList = [
     {word: "nutrient", level: "staff"},
     {word: "metabolism", level: "staff"},
     {word: "gastronomy", level: "staff"},
+    {word: "appetizer", level: "staff"},
     
     // School - Elementary (short words)
     {word: "book", level: "elementary"},
@@ -198,7 +195,6 @@ wordList = [
     {word: "algebra", level: "high"},
     {word: "geometry", level: "high"},
     {word: "calculus", level: "high"},
-    {word: "literature", level: "high"},
     {word: "psychology", level: "high"},
     
     // School - Staff
@@ -207,9 +203,9 @@ wordList = [
     {word: "criterion", level: "staff"},
     {word: "differentiation", level: "staff"},
     {word: "methodology", level: "staff"},
+    {word: "literature", level: "staff"},
     
     // Technology - Elementary (short words)
-    {word: "tech", level: "elementary"},
     {word: "web", level: "elementary"},
     {word: "site", level: "elementary"},
     {word: "game", level: "elementary"},
@@ -248,7 +244,6 @@ wordList = [
     {word: "protocol", level: "high"},
     {word: "processor", level: "high"},
     {word: "bandwidth", level: "high"},
-    {word: "peripheral", level: "high"},
     
     // Technology - Staff
     {word: "algorithm", level: "staff"},
@@ -256,6 +251,7 @@ wordList = [
     {word: "encryption", level: "staff"},
     {word: "infrastructure", level: "staff"},
     {word: "virtualization", level: "staff"},
+    {word: "peripheral", level: "staff"},
     
     // Positive Words - Elementary (short words)
     {word: "good", level: "elementary"},
@@ -314,6 +310,7 @@ window.wordList = wordList;
 // Define unwanted word combinations
 const unwantedCombinations = [
     ['blue', 'ball'],
+    ['watch', 'teacher'],
     // Add more unwanted combinations as needed
 ];
 
