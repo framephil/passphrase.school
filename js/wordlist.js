@@ -39,7 +39,6 @@ wordList = [
     {word: "all", level: "elementary"},
     {word: "are", level: "elementary"},
     {word: "they", level: "elementary"},
-    {word: "but", level: "elementary"},
     {word: "what", level: "elementary"},
     {word: "were", level: "elementary"},
     {word: "when", level: "elementary"},
@@ -241,8 +240,6 @@ wordList = [
     {word: "pencil", level: "middle"},
     {word: "paper", level: "middle"},
     {word: "chair", level: "middle"},
-    {word: "teacher", level: "middle"},
-    {word: "student", level: "middle"},
     {word: "class", level: "middle"},
     {word: "science", level: "middle"},
     {word: "music", level: "middle"},
@@ -379,7 +376,6 @@ window.wordList = wordList;
 // Define unwanted word combinations
 const unwantedCombinations = [
     ['blue', 'ball'],
-    ['watch', 'teacher'],
     // Add more unwanted combinations as needed
 ];
 
