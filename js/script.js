@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Store the selected complexity level
     let selectedLevel = 'middle'; // default to middle school
     
+    // Load saved options from localStorage if available
+    loadSavedOptions();
+    
     // Level selection buttons
     levelButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -77,11 +80,78 @@ document.addEventListener('DOMContentLoaded', function() {
     // Generate passphrase when the button is clicked
     generateBtn.addEventListener('click', generatePassphrase);
     
-    // Toggle advanced options
+    // Toggle advanced options panel and save the state
     optionsToggle.addEventListener('click', function() {
         optionsPanel.classList.toggle('visible');
         toggleOptionsBtn.textContent = optionsPanel.classList.contains('visible') ? '-' : '+';
+        
+        // Save the panel state to localStorage
+        try {
+            localStorage.setItem('optionsPanelOpen', optionsPanel.classList.contains('visible'));
+        } catch (e) {
+            console.log('Could not save panel state');
+        }
     });
+    
+    // Save options when they change
+    if (separatorSelect) {
+        separatorSelect.addEventListener('change', saveOptions);
+    }
+    if (capitalizationSelect) {
+        capitalizationSelect.addEventListener('change', saveOptions);
+    }
+    if (numberPlacementSelect) {
+        numberPlacementSelect.addEventListener('change', saveOptions);
+    }
+    if (disableAnimationsCheckbox) {
+        disableAnimationsCheckbox.addEventListener('change', saveOptions);
+    }
+    
+    // Function to save all options to localStorage
+    function saveOptions() {
+        try {
+            if (separatorSelect) localStorage.setItem('separator', separatorSelect.value);
+            if (capitalizationSelect) localStorage.setItem('capitalization', capitalizationSelect.value);
+            if (numberPlacementSelect) localStorage.setItem('numberPlacement', numberPlacementSelect.value);
+            if (disableAnimationsCheckbox) localStorage.setItem('disableAnimations', disableAnimationsCheckbox.checked);
+        } catch (e) {
+            console.log('Could not save options to localStorage');
+        }
+    }
+    
+    // Function to load saved options from localStorage
+    function loadSavedOptions() {
+        try {
+            // Load options panel state
+            const panelOpen = localStorage.getItem('optionsPanelOpen') === 'true';
+            if (panelOpen) {
+                optionsPanel.classList.add('visible');
+                toggleOptionsBtn.textContent = '-';
+            }
+            
+            // Load separator option
+            if (separatorSelect && localStorage.getItem('separator')) {
+                separatorSelect.value = localStorage.getItem('separator');
+            }
+            
+            // Load capitalization option
+            if (capitalizationSelect && localStorage.getItem('capitalization')) {
+                capitalizationSelect.value = localStorage.getItem('capitalization');
+            }
+            
+            // Load number placement option
+            if (numberPlacementSelect && localStorage.getItem('numberPlacement')) {
+                numberPlacementSelect.value = localStorage.getItem('numberPlacement');
+            }
+            
+            // Load animations setting
+            if (disableAnimationsCheckbox && localStorage.getItem('disableAnimations')) {
+                disableAnimationsCheckbox.checked = localStorage.getItem('disableAnimations') === 'true';
+            }
+        } catch (e) {
+            console.log('Could not load saved options');
+        }
+    }
     
     // Copy passphrase to clipboard on click
     passphraseResult.addEventListener('click', function() {
