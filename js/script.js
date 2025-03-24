@@ -47,11 +47,27 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Generate a passphrase immediately upon level selection
             generatePassphrase();
+            
+            // Scroll the passphrase into view after animations complete
+            setTimeout(scrollToPassphraseResult, 600);
         });
     });
     
+    // Function to scroll the passphrase result into view
+    function scrollToPassphraseResult() {
+        // Scroll directly to the generator container instead of the disclaimer
+        generatorContainer.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center' // Center the generator container in the viewport
+        });
+    }
+    
     // Generate passphrase when the button is clicked
-    generateBtn.addEventListener('click', generatePassphrase);
+    generateBtn.addEventListener('click', function() {
+        generatePassphrase();
+        // Remove scrolling behavior for the generate button
+        // No scrolling needed when generating a new passphrase
+    });
     
     // Toggle advanced options panel and save the state
     optionsToggle.addEventListener('click', function() {
