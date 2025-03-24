@@ -382,8 +382,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 result = parts.join(separatorOption);
             }
         } else {
-            // Default: add numbers at the end
-            result += numberStr;
+            // Default: add numbers at the end with separator in front
+            if (separatorOption === 'random') {
+                const separators = [' ', '-', '.', '_'];
+                const randSep = separators[Math.floor(Math.random() * separators.length)];
+                result += randSep + numberStr;
+            } else {
+                result += separatorOption + numberStr;
+            }
         }
         
         // Ensure the passphrase meets the minimum length requirement
@@ -623,7 +629,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 result = parts.join(separator);
             }
         } else {
-            result += digits;
+            // Default: add numbers at the end with separator in front
+            if (separator === 'random') {
+                const separators = [' ', '-', '.', '_'];
+                const randSep = separators[Math.floor(Math.random() * separators.length)];
+                result += randSep + digits;
+            } else {
+                result += separator + digits;
+            }
         }
         
         // Ensure minimum length
