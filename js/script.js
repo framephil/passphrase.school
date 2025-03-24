@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Try to find a suitable word from the current level
             while (attempts < 10 && selectedWord === '') {
-                const randomIndex = Math.floor(Math.random() * currentLevelWords.length);
+                const randomIndex = getSecureRandomInt(0, currentLevelWords.length - 1);
                 const candidateWord = currentLevelWords[randomIndex].word;
                 
                 // Skip if word is already used (shouldn't happen on first word)
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Now fill the rest with words from the cumulative list
         while (passphrase.length < wordCount) {
-            const randomIndex = Math.floor(Math.random() * words.length);
+            const randomIndex = getSecureRandomInt(0, words.length - 1);
             const selectedWord = words[randomIndex].word;
             
             // Skip if word is already used
@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // First make all words lowercase
                 passphrase = passphrase.map(word => word.toLowerCase());
                 // Then capitalize a random word
-                const randomIndex = Math.floor(Math.random() * passphrase.length);
+                const randomIndex = getSecureRandomInt(0, passphrase.length - 1);
                 passphrase[randomIndex] = capitalizeWord(passphrase[randomIndex]);
                 break;
         }
@@ -412,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 result += passphrase[i];
                 if (i < passphrase.length - 1) {
                     // Select a random separator for each word
-                    const randSep = separators[Math.floor(Math.random() * separators.length)];
+                    const randSep = separators[getSecureRandomInt(0, separators.length - 1)];
                     result += randSep;
                 }
             }
@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add numbers based on placement option
         if (numberPlacement === 'random' && passphrase.length > 0) {
             // Insert numbers at a random position
-            const insertPosition = Math.floor(Math.random() * (passphrase.length + 1));
+            const insertPosition = getSecureRandomInt(0, passphrase.length);
             
             // Split the result into parts
             if (separatorOption === 'random') {
@@ -449,14 +449,14 @@ document.addEventListener('DOMContentLoaded', function() {
                             newResult = newResult.slice(0, -1); // Remove the last separator
                         }
                         if (i < passphrase.length) {
-                            newResult += separators[Math.floor(Math.random() * separators.length)];
+                            newResult += separators[getSecureRandomInt(0, separators.length - 1)];
                         }
                     }
                     
                     newResult += passphrase[i];
                     // Add a separator if not at the end
                     if (i < passphrase.length - 1) {
-                        newResult += separators[Math.floor(Math.random() * separators.length)];
+                        newResult += separators[getSecureRandomInt(0, separators.length - 1)];
                     }
                 }
                 
@@ -476,7 +476,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Default: add numbers at the end with separator in front
             if (separatorOption === 'random') {
                 const separators = [' ', '-', '.', '_'];
-                const randSep = separators[Math.floor(Math.random() * separators.length)];
+                const randSep = separators[getSecureRandomInt(0, separators.length - 1)];
                 result += randSep + numberStr;
             } else {
                 result += separatorOption + numberStr;
@@ -502,28 +502,72 @@ document.addEventListener('DOMContentLoaded', function() {
         return word.charAt(0).toUpperCase() + word.slice(1);
     }
     
-    // Generate a single safe number (allowing all digits including 6 and 9)
+    // Generate a single safe number using cryptographically secure random generation
     function generateSingleDigitNumber() {
-        // Generate a single-digit number (0-9)
-        const num = Math.floor(Math.random() * 10);
-        return num.toString();
+        // Use Crypto API for secure random number generation
+        if (window.crypto && window.crypto.getRandomValues) {
+            const array = new Uint8Array(1);
+            window.crypto.getRandomValues(array);
+            // Modulo 10 to get a digit between 0-9
+            return (array[0] % 10).toString();
+        } else {
+            // Fallback to Math.random() if Crypto API is not available
+            console.warn("Crypto API not available, using Math.random() instead");
+            return Math.floor(Math.random() * 10).toString();
+        }
     }
 
-    // Generate a safe two-digit number combination
+    // Generate a safe two-digit number combination using cryptographically secure random generation
     function generateSafeNumberCombination() {
         const unsafeCombinations = ['69', '96', '13', '666', '420', '123', '911', '666', '88']; // Unsafe combinations
         
         let numberCombo;
         do {
-            // Generate two random digits (0-9) without restrictions
-            const firstDigit = Math.floor(Math.random() * 10);
-            const secondDigit = Math.floor(Math.random() * 10);
-            
-            numberCombo = firstDigit.toString() + secondDigit.toString();
+            // Generate two random digits using crypto API
+            if (window.crypto && window.crypto.getRandomValues) {
+                const array = new Uint8Array(2);
+                window.crypto.getRandomValues(array);
+                const firstDigit = array[0] % 10;
+                const secondDigit = array[1] % 10;
+                numberCombo = firstDigit.toString() + secondDigit.toString();
+            } else {
+                // Fallback to Math.random()
+                console.warn("Crypto API not available, using Math.random() instead");
+                const firstDigit = Math.floor(Math.random() * 10);
+                const secondDigit = Math.floor(Math.random() * 10);
+                numberCombo = firstDigit.toString() + secondDigit.toString();
+            }
             // Check if the combination is in our unsafe list
         } while (unsafeCombinations.includes(numberCombo));
         
         return numberCombo;
+    }
+
+    // Helper function for secure random integer in range [min, max]
+    function getSecureRandomInt(min, max) {
+        if (window.crypto && window.crypto.getRandomValues) {
+            // Create byte array large enough to hold our value
+            const range = max - min + 1;
+            const bytesNeeded = Math.ceil(Math.log2(range) / 8);
+            const maxValue = Math.pow(256, bytesNeeded);
+            const array = new Uint8Array(bytesNeeded);
+            
+            let value;
+            do {
+                window.crypto.getRandomValues(array);
+                value = 0;
+                for (let i = 0; i < bytesNeeded; i++) {
+                    value = (value << 8) + array[i];
+                }
+                // We discard values outside our range to avoid modulo bias
+            } while (value >= maxValue - (maxValue % range));
+            
+            return min + (value % range);
+        } else {
+            // Fallback to Math.random()
+            console.warn("Crypto API not available, using Math.random() instead");
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
     }
 
     // Function to adjust font size based on content
@@ -646,13 +690,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // First, add one word from the current level
         if (filteredCurrentLevelWords.length > 0) {
-            const randomIndex = Math.floor(Math.random() * filteredCurrentLevelWords.length);
+            const randomIndex = getSecureRandomInt(0, filteredCurrentLevelWords.length - 1);
             randomWords.push(filteredCurrentLevelWords[randomIndex].word);
         }
 
         // Fill the remaining words from the cumulative list
         while (randomWords.length < wordCount) {
-            const randomIndex = Math.floor(Math.random() * filteredWords.length);
+            const randomIndex = getSecureRandomInt(0, filteredWords.length - 1);
             randomWords.push(filteredWords[randomIndex].word);
         }
 
@@ -675,7 +719,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // First make all words lowercase
                 randomWords = randomWords.map(word => word.toLowerCase());
                 // Then capitalize a random word
-                const randomIndex = Math.floor(Math.random() * randomWords.length);
+                const randomIndex = getSecureRandomInt(0, randomWords.length - 1);
                 randomWords[randomIndex] = capitalizeWord(randomWords[randomIndex]);
                 break;
         }
@@ -688,7 +732,7 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let i = 0; i < randomWords.length; i++) {
                 result += randomWords[i];
                 if (i < randomWords.length - 1) {
-                    const randSep = separators[Math.floor(Math.random() * separators.length)];
+                    const randSep = separators[getSecureRandomInt(0, separators.length - 1)];
                     result += randSep;
                 }
             }
@@ -707,12 +751,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (numberPlacement === 'random' && randomWords.length > 0) {
-            const insertPosition = Math.floor(Math.random() * (randomWords.length + 1));
+            const insertPosition = getSecureRandomInt(0, randomWords.length);
             
             if (separator === 'random') {
                 // Similar logic as in the main function for random separators
                 // ...simplified for animation...
-                const randomPosition = Math.floor(Math.random() * (result.length + 1));
+                const randomPosition = getSecureRandomInt(0, result.length);
                 result = result.slice(0, randomPosition) + digits + result.slice(randomPosition);
             } else {
                 const parts = result.split(separator);
@@ -723,7 +767,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Default: add numbers at the end with separator in front
             if (separator === 'random') {
                 const separators = [' ', '-', '.', '_'];
-                const randSep = separators[Math.floor(Math.random() * separators.length)];
+                const randSep = separators[getSecureRandomInt(0, separators.length - 1)];
                 result += randSep + digits;
             } else {
                 result += separator + digits;
