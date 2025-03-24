@@ -434,35 +434,29 @@ document.addEventListener('DOMContentLoaded', function() {
             // Insert numbers at a random position
             const insertPosition = getSecureRandomInt(0, passphrase.length);
             
+            // Ensure we're using the correct digit count (for debugging)
+            console.log('Selected digit count:', digitCount);
+            console.log('Generated number string:', numberStr);
+            
             // Split the result into parts
             if (separatorOption === 'random') {
                 // For random separators, we need to rebuild using the passphrase array
                 let newResult = '';
                 const separators = [' ', '-', '.', '_'];
                 
-                for (let i = 0; i < passphrase.length; i++) {
-                    // Insert numbers if we're at the right position
-                    if (i === insertPosition) {
-                        newResult += numberStr;
-                        // Add a separator if not at the beginning
-                        if (i > 0) {
-                            newResult = newResult.slice(0, -1); // Remove the last separator
-                        }
-                        if (i < passphrase.length) {
-                            newResult += separators[getSecureRandomInt(0, separators.length - 1)];
-                        }
-                    }
-                    
-                    newResult += passphrase[i];
-                    // Add a separator if not at the end
-                    if (i < passphrase.length - 1) {
-                        newResult += separators[getSecureRandomInt(0, separators.length - 1)];
-                    }
-                }
+                // Create a copy of the passphrase array and insert the number at the right position
+                const modifiedPassphrase = [...passphrase];
+                modifiedPassphrase.splice(insertPosition, 0, numberStr);
                 
-                // If insertion point is at the end, add numbers
-                if (insertPosition === passphrase.length) {
-                    newResult += numberStr;
+                // Now build the result with random separators
+                for (let i = 0; i < modifiedPassphrase.length; i++) {
+                    newResult += modifiedPassphrase[i];
+                    
+                    // Add random separator if not at the end
+                    if (i < modifiedPassphrase.length - 1) {
+                        const randSep = separators[getSecureRandomInt(0, separators.length - 1)];
+                        newResult += randSep;
+                    }
                 }
                 
                 result = newResult;
@@ -754,10 +748,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const insertPosition = getSecureRandomInt(0, randomWords.length);
             
             if (separator === 'random') {
-                // Similar logic as in the main function for random separators
-                // ...simplified for animation...
-                const randomPosition = getSecureRandomInt(0, result.length);
-                result = result.slice(0, randomPosition) + digits + result.slice(randomPosition);
+                // Use a similar approach as the main function for consistency
+                const modifiedWords = [...randomWords]; 
+                modifiedWords.splice(insertPosition, 0, digits);
+                
+                // Build result with random separators
+                const separators = [' ', '-', '.', '_'];
+                result = '';
+                
+                for (let i = 0; i < modifiedWords.length; i++) {
+                    result += modifiedWords[i];
+                    if (i < modifiedWords.length - 1) {
+                        const randSep = separators[getSecureRandomInt(0, separators.length - 1)];
+                        result += randSep;
+                    }
+                }
             } else {
                 const parts = result.split(separator);
                 parts.splice(insertPosition, 0, digits);
