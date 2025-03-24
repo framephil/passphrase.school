@@ -13,9 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const capitalizationSelect = document.getElementById('capitalization');
     const numberPlacementSelect = document.getElementById('numberPlacement');
     const disableAnimationsCheckbox = document.getElementById('disableAnimations');
+    const printBtn = document.getElementById('printBtn'); // Add reference to print button
     
-    // Store the selected complexity level
+    // Store the selected complexity level and generation timestamp
     let selectedLevel = 'middle'; // default to middle school
+    let generationTimestamp = ''; // Track when the passphrase was generated
     
     // Load saved options from localStorage if available
     loadSavedOptions();
@@ -170,8 +172,97 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Print button functionality
+    if (printBtn) {
+        printBtn.addEventListener('click', function() {
+            printPassphrase();
+        });
+    }
+    
+    // Function to print just the passphrase
+    function printPassphrase() {
+        if (!passphraseResult.textContent || passphraseResult.textContent === 'Copied to clipboard!') {
+            return; // Don't print if there's no passphrase or if it shows the copied message
+        }
+        
+        const passphrase = passphraseResult.textContent;
+        // Use the stored generation timestamp instead of the current time
+        const timestamp = generationTimestamp || 'Unknown time'; 
+        
+        // Create a new window for printing
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Your Passphrase</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        margin: 20px;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+                    .passphrase-container {
+                        margin-top: 20px;
+                    }
+                    .passphrase-label {
+                        font-weight: bold;
+                        font-size: 12pt;
+                        margin-bottom: 8px;
+                    }
+                    .passphrase {
+                        font-size: 14pt;
+                        font-weight: bold;
+                        padding: 10px;
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        background-color: #f9f9f9;
+                        word-break: break-all;
+                        max-width: 100%;
+                        margin-bottom: 8px;
+                    }
+                    .timestamp {
+                        font-size: 10pt;
+                        color: #666;
+                        font-style: italic;
+                    }
+                    @media print {
+                        .passphrase {
+                            border: none;
+                            background: none;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="passphrase-container">
+                    <div class="passphrase-label">Your passphrase is:</div>
+                    <div class="passphrase">${passphrase}</div>
+                    <div class="timestamp">Generated on: ${timestamp}</div>
+                </div>
+                <script>
+                    // Automatically print and close after loading
+                    window.onload = function() {
+                        window.print();
+                        // Close the window after printing (timeout gives time for print dialog)
+                        setTimeout(function() {
+                            window.close();
+                        }, 500);
+                    };
+                </script>
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+    }
+
     // Generate passphrase function
     function generatePassphrase() {
+        // Update the generation timestamp
+        const currentDate = new Date();
+        generationTimestamp = currentDate.toLocaleDateString() + ' ' + currentDate.toLocaleTimeString();
+        
         // Get all selected options
         const separatorOption = separatorSelect.value;
         const capitalization = capitalizationSelect.value;

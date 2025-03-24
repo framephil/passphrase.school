@@ -538,15 +538,21 @@ body.theme-dark {
 .options-panel {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease;
+    transition: all 0.4s ease;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .options-panel.visible {
-    max-height: 400px; /* Increased from 300px to fit more options */
+    max-height: 1000px; /* Much larger value to accommodate all content */
+    opacity: 1;
+    visibility: visible;
 }
 
 .options-panel.hidden {
     max-height: 0;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .options-container {
@@ -598,6 +604,41 @@ input[disabled] {
 .checkbox-option label {
     margin: 0;
     cursor: pointer;
+}
+
+/* Add styling for the print button in options panel */
+.print-option {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.print-btn {
+    background-color: #5c5c5c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.print-btn:hover {
+    background-color: #444444;
+}
+
+/* Ensure the button isn't too wide in the options panel */
+.option-group .print-btn {
+    width: auto;
+    max-width: 100%;
+}
+
+@media (max-width: 600px) {
+    .option-group .print-btn {
+        width: 100%;
+        margin: 5px 0;
+    }
 }
 
 /* Education Section */
@@ -817,6 +858,22 @@ input[disabled] {
     
     .passphrase-tips ul {
         columns: 1;
+    }
+    
+    .options-panel.visible {
+        padding-bottom: 15px; /* Add some padding at the bottom for mobile */
+    }
+    
+    .options-container {
+        flex-direction: column;
+        align-items: stretch; /* Fill the width */
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .option-group {
+        margin-bottom: 0.8rem;
+        max-width: none;
     }
 }
 
