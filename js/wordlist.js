@@ -19,9 +19,6 @@
     // Queue of callbacks to execute once the wordlist is loaded
     const callbacks = [];
     
-    // Log loading status for debugging
-    console.log('Initializing wordlist.js - attempting to load wordlist.csv');
-    
     // Load the CSV file when the script is first executed
     loadWordListFromCSV();
     
@@ -29,93 +26,52 @@
      * Loads the wordlist from the CSV file
      */
     function loadWordListFromCSV() {
-        // Try different relative paths since the issue might be with the path
-        const possiblePaths = ['data/wordlist.csv', '/data/wordlist.csv', './data/wordlist.csv', '../data/wordlist.csv'];
-        
-        // Log the current location for debugging
-        console.log('Current script location: ' + window.location.href);
-        
-        // Try the first path
-        tryLoadCSV(possiblePaths, 0);
-    }
-    
-    /**
-     * Try loading CSV from multiple possible paths
-     */
-    function tryLoadCSV(paths, index) {
-        if (index >= paths.length) {
-            // We've tried all paths and failed
-            const error = new Error("Failed to load wordlist.csv from any of the attempted paths");
-            handleLoadError(error);
-            return;
-        }
-        
-        const path = paths[index];
-        console.log(`Attempting to load from: ${path}`);
-        
-        fetch(path)
+        fetch('data/wordlist.csv')
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`Failed to load wordlist from ${path}: ${response.status} ${response.statusText}`);
+                    throw new Error(`Failed to load wordlist: ${response.status} ${response.statusText}`);
                 }
-                console.log(`Successfully fetched CSV from ${path}`);
                 return response.text();
             })
             .then(csvText => {
-                console.log(`CSV data received, length: ${csvText.length} characters`);
                 parseCSV(csvText);
                 isLoaded = true;
                 
                 // Execute any callbacks that were waiting for the data
-                console.log(`Executing ${callbacks.length} waiting callbacks`);
                 callbacks.forEach(callback => {
                     try {
-                        callback(null);
+                        callback(null, true);
                     } catch(e) {
                         console.error('Error in callback:', e);
                     }
                 });
-                // Clear the callbacks array
-                callbacks.length = 0;
             })
             .catch(error => {
-                console.warn(`Failed to load from ${path}: ${error.message}`);
-                // Try the next path
-                tryLoadCSV(paths, index + 1);
+                console.error('Error loading wordlist:', error);
+                hasError = true;
+                errorMessage = error.message;
+                
+                // Execute callbacks with error
+                callbacks.forEach(callback => {
+                    try {
+                        callback(error, false);
+                    } catch(e) {
+                        console.error('Error in error callback:', e);
+                    }
+                });
+                
+                // Display error on page if possible
+                const generator = document.getElementById('generator');
+                if (generator) {
+                    generator.innerHTML = `
+                        <div class="error-message" style="color: var(--danger-color); text-align: center; padding: 2rem;">
+                            <h3>Error Loading Word List</h3>
+                            <p>${errorMessage}</p>
+                            <p>Please check that the CSV file exists at /data/wordlist.csv</p>
+                        </div>
+                    `;
+                }
             });
-    }
-    
-    /**
-     * Handle a critical loading error after all paths have been tried
-     */
-    function handleLoadError(error) {
-        console.error('Error loading wordlist:', error);
-        hasError = true;
-        errorMessage = error.message;
-        
-        // Execute callbacks with error
-        callbacks.forEach(callback => {
-            try {
-                callback(error);
-            } catch(e) {
-                console.error('Error in error callback:', e);
-            }
-        });
-        // Clear the callbacks array
-        callbacks.length = 0;
-        
-        // Display error on page if possible
-        const generator = document.getElementById('generator');
-        if (generator) {
-            generator.innerHTML = `
-                <div class="error-message" style="color: var(--danger-color); text-align: center; padding: 2rem;">
-                    <h3>Error Loading Word List</h3>
-                    <p>${errorMessage}</p>
-                    <p>Please check that the CSV file exists at data/wordlist.csv</p>
-                    <p>Technical details: This error occurred after trying multiple possible paths.</p>
-                </div>
-            `;
-        }
     }
     
     /**
@@ -123,7 +79,6 @@
      */
     function parseCSV(csvText) {
         const lines = csvText.split('\n');
-        console.log(`Parsing CSV with ${lines.length} lines`);
         
         // Skip the header row if it exists
         const startIndex = lines[0].toLowerCase().includes('word') ? 1 : 0;
@@ -147,8 +102,6 @@
             }
         }
         
-        console.log(`Successfully loaded ${wordlist.length} words`);
-        
         // Verify that we loaded at least some words
         if (wordlist.length === 0) {
             throw new Error("CSV file was loaded but no valid words were found");
@@ -161,9 +114,6 @@
                 console.warn(`Warning: No words found for level "${level}"`);
             }
         }
-        
-        // Log sample of words for debugging
-        console.log("Sample words:", wordlist.slice(0, 5));
     }
     
     /**
@@ -171,15 +121,10 @@
      */
     function getWordsByLevel(level) {
         return ensureDataIsReady((error) => {
-            if (error) {
-                console.error(`Error getting words for level ${level}:`, error);
-                return [];
-            }
+            if (error) return [];
             
             // Filter words only from the specified level
-            const result = wordlist.filter(word => word.level === level);
-            console.log(`Retrieved ${result.length} words for level "${level}"`);
-            return result;
+            return wordlist.filter(word => word.level === level);
         });
     }
     
@@ -189,10 +134,7 @@
      */
     function getWordsByLevelCumulative(level) {
         return ensureDataIsReady((error) => {
-            if (error) {
-                console.error(`Error getting cumulative words for level ${level}:`, error);
-                return [];
-            }
+            if (error) return [];
             
             const levelHierarchy = {
                 "elementary": 0,
@@ -204,29 +146,26 @@
             const targetLevel = levelHierarchy[level] || 0;
             
             // Get all words up to and including the target level
-            const result = wordlist.filter(word => {
+            return wordlist.filter(word => {
                 const wordLevel = levelHierarchy[word.level] || 0;
                 return wordLevel <= targetLevel;
             });
-            
-            console.log(`Retrieved ${result.length} cumulative words for level "${level}" and below`);
-            return result;
         });
     }
     
     /**
      * Helper function to ensure the wordlist data is ready
-     * If the data is not yet loaded, it adds the callback to be executed when data is ready
-     * and returns an empty array in the meantime
+     * If the data is not yet loaded, it returns an empty array
+     * and adds the callback to be executed when data is ready
      */
     function ensureDataIsReady(callback) {
         if (isLoaded) {
-            // Data is already loaded, execute callback immediately
             return callback(hasError ? new Error(errorMessage) : null);
+        } else if (hasError) {
+            return callback(new Error(errorMessage));
         } else {
-            // Data is not loaded yet, queue the callback and return empty array
+            // Queue the callback to run when data is available
             callbacks.push(callback);
-            console.log(`Data not ready yet. Added callback to queue. Total callbacks waiting: ${callbacks.length}`);
             return [];
         }
     }
@@ -263,17 +202,4 @@
     window.getWordsByLevel = getWordsByLevel;
     window.getWordsByLevelCumulative = getWordsByLevelCumulative;
     window.isBadCombination = isBadCombination;
-    
-    // Export for debugging
-    window.debugWordlist = {
-        getStatus: function() {
-            return {
-                isLoaded,
-                hasError,
-                errorMessage,
-                wordCount: wordlist.length,
-                callbackCount: callbacks.length
-            };
-        }
-    };
 })();
