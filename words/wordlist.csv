@@ -1,515 +1,515 @@
-word,level,category,notes
-cat,elementary,animals,short words
-dog,elementary,animals,short words
-fish,elementary,animals,short words
-bird,elementary,animals,short words
-pig,elementary,animals,short words
-frog,elementary,animals,short words
-hen,elementary,animals,short words
-cow,elementary,animals,short words
-bug,elementary,animals,short words
-ant,elementary,animals,short words
-bee,elementary,animals,short words
-bat,elementary,animals,short words
-fox,elementary,animals,short words
-owl,elementary,animals,short words
-hat,elementary,sight words,longer than 2 characters
-the,elementary,sight words,longer than 2 characters
-and,elementary,sight words,longer than 2 characters
-for,elementary,sight words,longer than 2 characters
-you,elementary,sight words,longer than 2 characters
-say,elementary,sight words,longer than 2 characters
-she,elementary,sight words,longer than 2 characters
-her,elementary,sight words,longer than 2 characters
-was,elementary,sight words,longer than 2 characters
-all,elementary,sight words,longer than 2 characters
-are,elementary,sight words,longer than 2 characters
-they,elementary,sight words,longer than 2 characters
-what,elementary,sight words,longer than 2 characters
-were,elementary,sight words,longer than 2 characters
-when,elementary,sight words,longer than 2 characters
-your,elementary,sight words,longer than 2 characters
-can,elementary,sight words,longer than 2 characters
-said,elementary,sight words,longer than 2 characters
-there,elementary,sight words,longer than 2 characters
-use,elementary,sight words,longer than 2 characters
-each,elementary,sight words,longer than 2 characters
-which,elementary,sight words,longer than 2 characters
-this,elementary,sight words,longer than 2 characters
-that,elementary,sight words,longer than 2 characters
-look,elementary,sight words,longer than 2 characters
-more,elementary,sight words,longer than 2 characters
-made,elementary,sight words,longer than 2 characters
-may,elementary,sight words,longer than 2 characters
-part,elementary,sight words,longer than 2 characters
-into,elementary,sight words,longer than 2 characters
-over,elementary,sight words,longer than 2 characters
-know,elementary,sight words,longer than 2 characters
-than,elementary,sight words,longer than 2 characters
-find,elementary,sight words,longer than 2 characters
-first,elementary,sight words,longer than 2 characters
-down,elementary,sight words,longer than 2 characters
-been,elementary,sight words,longer than 2 characters
-call,elementary,sight words,longer than 2 characters
-who,elementary,sight words,longer than 2 characters
-now,elementary,sight words,longer than 2 characters
-long,elementary,sight words,longer than 2 characters
-time,elementary,sight words,longer than 2 characters
-much,elementary,sight words,longer than 2 characters
-tell,elementary,sight words,longer than 2 characters
-very,elementary,sight words,longer than 2 characters
-new,elementary,sight words,longer than 2 characters
-any,elementary,sight words,longer than 2 characters
-from,elementary,sight words,longer than 2 characters
-have,elementary,sight words,longer than 2 characters
-some,elementary,sight words,longer than 2 characters
-him,elementary,sight words,longer than 2 characters
-make,elementary,sight words,longer than 2 characters
-has,elementary,sight words,longer than 2 characters
-see,elementary,sight words,longer than 2 characters
-his,elementary,sight words,longer than 2 characters
-how,elementary,sight words,longer than 2 characters
-our,elementary,sight words,longer than 2 characters
-out,elementary,sight words,longer than 2 characters
-just,elementary,sight words,longer than 2 characters
-get,elementary,sight words,longer than 2 characters
-man,elementary,sight words,longer than 2 characters
-old,elementary,sight words,longer than 2 characters
-not,elementary,sight words,longer than 2 characters
-day,elementary,sight words,longer than 2 characters
-rabbit,middle,animals
-tiger,middle,animals
-lion,middle,animals
-monkey,middle,animals
-zebra,middle,animals
-elephant,middle,animals
-giraffe,middle,animals
-dolphin,middle,animals
-penguin,middle,animals
-turtle,middle,animals
-panda,middle,animals
-koala,middle,animals
-bear,middle,animals
-wolf,middle,animals
-shark,middle,animals
-eagle,middle,animals
-lizard,middle,animals
-octopus,middle,animals
-mammal,high,animals
-reptile,high,animals
-amphibian,high,animals
-primate,high,animals
-canine,high,animals
-feline,high,animals
-equine,high,animals
-marsupial,high,animals
-crustacean,high,animals
-vertebrate,staff,animals
-invertebrate,staff,animals
-carnivore,staff,animals
-herbivore,staff,animals
-omnivore,staff,animals
-arthropod,staff,animals
-mollusk,staff,animals
-red,elementary,color,short words
-blue,elementary,color,short words
-green,elementary,color,short words
-pink,elementary,color,short words
-gray,elementary,color,short words
-yellow,middle,colors
-purple,middle,colors
-orange,middle,colors
-brown,middle,colors
-gold,middle,colors
-silver,middle,colors
-rainbow,middle,colors
-violet,middle,colors
-teal,middle,colors
-navy,middle,colors
-lime,middle,colors
-ruby,high,colors
-amber,high,colors
-coral,high,colors
-indigo,high,colors
-turquoise,high,colors
-sapphire,high,colors
-emerald,high,colors
-crimson,high,colors
-magenta,staff,colors
-periwinkle,staff,colors
-cerulean,staff,colors
-vermilion,staff,colors
-food,elementary,food,short words
-cake,elementary,food,short words
-pie,elementary,food,short words
-egg,elementary,food,short words
-jam,elementary,food,short words
-bread,elementary,food,short words
-rice,elementary,food,short words
-meat,elementary,food,short words
-soup,elementary,food,short words
-apple,middle,middle,food
-banana,middle,middle,food
-grape,middle,middle,food
-pizza,middle,middle,food
-cookie,middle,middle,food
-candy,middle,middle,food
-popcorn,middle,middle,food
-cheese,middle,middle,food
-sandwich,middle,middle,food
-taco,middle,middle,food
-pasta,middle,middle,food
-salad,middle,middle,food
-carrot,middle,middle,food
-potato,middle,middle,food
-muffin,middle,middle,food
-donut,middle,middle,food
-berry,middle,middle,food
-cuisine,high,food
-nutrition,high,food
-dessert,high,food
-protein,high,food
-vitamin,high,food
-mineral,high,food
-organic,high,food
-vegetarian,high,food
-culinary,staff,food
-gourmet,staff,food
-nutrient,staff,food
-metabolism,staff,food
-gastronomy,staff,food
-appetizer,staff,food
-book,elementary,school,short words
-pen,elementary,school,short words
-desk,elementary,school,short words
-math,elementary,school,short words
-read,elementary,school,short words
-test,elementary,school,short words
-gym,elementary,school,short words
-bell,elementary,school,short words
-art,elementary,school,short words
-hall,elementary,school,short words
-room,elementary,school,short words
-map,elementary,school,short words
-ball,elementary,school,short words
-pencil,middle,school
-paper,middle,school
-chair,middle,school
-class,middle,school
-science,middle,school
-music,middle,school
-library,middle,school
-lunch,middle,school
-recess,middle,school
-backpack,middle,school
-homework,middle,school
-project,middle,school
-exam,middle,school
-semester,high,school
-graduation,high,school
-biology,high,school
-chemistry,high,school
-physics,high,school
-algebra,high,school
-geometry,high,school
-calculus,high,school
-psychology,high,school
-assessment,staff,school
-evaluation,staff,school
-criterion,staff,school
-differentiation,staff,school
-methodology,staff,school
-literature,staff,school
-web,elementary,technology,short words
-site,elementary,technology,short words
-game,elementary,technology,short words
-app,elementary,technology,short words
-chat,elementary,technology,short words
-key,elementary,technology,short words
-type,elementary,technology,short words
-mouse,elementary,technology,short words
-click,elementary,technology,short words
-link,elementary,technology,short words
-computer,middle,technology
-phone,middle,technology
-tablet,middle,technology
-robot,middle,technology
-code,middle,technology
-screen,middle,technology
-video,middle,technology
-photo,middle,technology
-camera,middle,technology
-watch,middle,technology
-speaker,middle,technology
-wireless,middle,technology
-digital,middle,technology
-keyboard,middle,technology
-internet,middle,technology
-network,high,technology
-security,high,technology
-software,high,technology
-hardware,high,technology
-programming,high,technology
-interface,high,technology
-protocol,high,technology
-processor,high,technology
-bandwidth,high,technology
-algorithm,staff,technology
-database,staff,technology
-encryption,staff,technology
-infrastructure,staff,technology
-virtualization,staff,technology
-peripheral,staff,technology
-good,elementary,positive words,short words
-best,elementary,positive words,short words
-fun,elementary,positive words,short words
-kind,elementary,positive words,short words
-nice,elementary,positive words,short words
-glad,elementary,positive words,short words
-joy,elementary,positive words,short words
-like,elementary,positive words,short words
-hope,elementary,positive words,short words
-care,elementary,positive words,short words
-help,elementary,positive words,short words
-safe,elementary,positive words,short words
-play,elementary,positive words,short words
-happy,middle,positive words
-smile,middle,positive words
-brave,middle,positive words
-smart,middle,positive words
-bright,middle,positive words
-super,middle,positive words
-amazing,middle,positive words
-awesome,middle,positive words
-cool,middle,positive words
-great,middle,positive words
-epic,middle,positive words
-clever,middle,positive words
-hero,middle,positive words
-friend,middle,positive words
-excellent,middle,positive words
-outstanding,high,positive words
-exceptional,high,positive words
-brilliant,high,positive words
-fantastic,high,positive words
-magnificent,high,positive words
-impressive,high,positive words
-phenomenal,high,positive words
-remarkable,high,positive words
-wonderful,high,positive words
-exemplary,staff,postiive words
-proficient,staff,postiive words
-distinguished,staff,postiive words
-commendable,staff,postiive words
-sun,elementary,nature,short words
-moon,elementary,nature,short words
-star,elementary,nature,short words
-tree,elementary,nature,short words
-leaf,elementary,nature,short words
-rock,elementary,nature,short words
-rain,elementary,nature,short words
-snow,elementary,nature,short words
-hill,elementary,nature,short words
-forest,middle,nature
-ocean,middle,nature
-planet,middle,nature
-mountain,middle,nature
-garden,middle,nature
-weather,middle,nature
-climate,middle,nature
-valley,middle,nature
-canyon,middle,nature
-car,elementary,transportation
-bike,elementary,transportation
-boat,elementary,transportation
-ship,elementary,transportation
-train,elementary,transportation
-plane,elementary,transportation
-van,elementary,transportation
-bus,elementary,transportation
-soccer,middle,sports
-baseball,middle,sports
-football,middle,sports
-tennis,middle,sports
-hockey,middle,sports
-basketball,middle,sports
-swimming,middle,sports
-running,middle,sports
-jumping,middle,sports
-skating,middle,sports
-analytics,staff,business
-component,staff,business
-framework,staff,business
-structure,staff,business
-workflow,staff,business
-resource,staff,business
-integrate,staff,business
-pedagogy,staff,education
-cognition,staff,education
-curriculum,staff,education
-milestone,staff,education
-objective,staff,education
-benchmark,staff,education
-coherent,staff,education
-synthesis,staff,education
-molecule,high,science
-electron,high,science
-element,high,science
-compound,high,science
-ecosystem,high,science
-theorem,high,science
-equation,high,science
-velocity,high,science
-genetics,high,science
-narrative,high,literature
-metaphor,high,literature
-symbolism,high,literature
-character,high,literature
-chapter,high,literature
-poetry,high,literature
-fiction,high,literature
-essay,high,literature
-sky,elementary,additional words
-sand,elementary,additional words
-wind,elementary,additional words
-farm,elementary,additional words
-jump,elementary,additional words
-swim,elementary,additional words
-walk,elementary,additional words
-talk,elementary,additional words
-flag,elementary,additional words
-step,elementary,additional words
-gift,elementary,additional words
-shop,elementary,additional words
-love,elementary,additional words
-kite,elementary,additional words
-hand,elementary,additional words
-planet,middle,additional words
-century,middle,additional words
-galaxy,middle,additional words
-statue,middle,additional words
-history,middle,additional words
-gravity,middle,additional words
-museum,middle,additional words
-castle,middle,additional words
-theater,middle,additional words
-kingdom,middle,additional words
-wisdom,middle,additional words
-courage,middle,additional words
-victory,middle,additional words
-puzzle,middle,additional words
-trophy,middle,additional words
-concert,middle,additional words
-comedy,middle,additional words
-mystery,middle,additional words
-analysis,high,additional words
-synthesis,high,additional words
-hypothesis,high,additional words
-democracy,high,additional words
-republic,high,additional words
-economic,high,additional words
-function,high,additional words
-variable,high,additional words
-periodic,high,additional words
-symphony,high,additional words
-influence,high,additional words
-innovation,high,additional words
-strategy,high,additional words
-prosperity,high,additional words
-perspective,high,additional words
-integrity,high,additional words
-compliance,staff,additional words
-initiative,staff,additional words
-foundation,staff,additional words
-strategic,staff,additional words
-scaffolding,staff,additional words
-innovation,staff,additional words
-leadership,staff,additional words
-engagement,staff,additional words
-professional,staff,additional words
-development,staff,additional words
-collaborative,staff,additional words
-achievement,staff,additional words
-acquisition,staff,additional words
-remediation,staff,additional words
-optimization,staff,additional words
-atom,elementary,science
-cell,elementary,science
-plant,elementary,science
-grow,elementary,science
-stem,elementary,science
-root,elementary,science
-soil,elementary,science
-air,elementary,science
-heat,elementary,science
-cold,elementary,science
-mix,elementary,science
-melt,elementary,science
-float,elementary,science
-sink,elementary,science
-melody,middle,music & arts
-rhythm,middle,music & arts
-harmony,middle,music & arts
-chorus,middle,music & arts
-canvas,middle,music & arts
-painting,middle,music & arts
-drawing,middle,music & arts
-sculpture,middle,music & arts
-ceramic,middle,music & arts
-theater,middle,music & arts
-actor,middle,music & arts
-studio,middle,music & arts
-orchestra,middle,music & arts
-composer,middle,music & arts
-latitude,high,geography
-longitude,high,geography
-continent,high,geography
-peninsula,high,geography
-isthmus,high,geography
-plateau,high,geography
-climate,high,geography
-terrain,high,geography
-cultural,high,geography
-boundary,high,geography
-region,high,geography
-capital,high,geography
-nation,high,geography
-resource,high,geography
-policy,staff,administration
-guideline,staff,administration
-procedure,staff,administration
-implement,staff,administration
-initiative,staff,administration
-oversight,staff,administration
-credential,staff,administration
-faculty,staff,administration
-committee,staff,administration
-council,staff,administration
-provision,staff,administration
-accredit,staff,administration
-tenure,staff,administration
-mario,elementary,video game characters,shoter/simpler names
-luigi,elementary,video game characters,shoter/simpler names
-yoshi,elementary,video game characters,shoter/simpler names
-peach,elementary,video game characters,shoter/simpler names
-toad,elementary,video game characters,shoter/simpler names
-kirby,elementary,video game characters,shoter/simpler names
-zelda,middle,video game characters
-samus,middle,video game characters
-donkey,middle,video game characters
-bowser,middle,video game characters
-wario,middle,video game characters
-daisy,middle,video game characters
-rosalina,middle,video game characters
-pikachu,middle,video game characters
-jigglypuff,middle,video game characters
-ganondorf,high,video game characters
-metroid,high,video game characters
-mewtwo,high,video game characters
-charizard,high,video game characters
-bulbasaur,high,video game characters
-charmander,high,video game characters
-lucario,high,video game characters
-pokemon,staff,video game franchises
-splatoon,staff,video game franchises
-starfox,staff,video game franchises
+word,level
+cat,elementary
+dog,elementary
+fish,elementary
+bird,elementary
+pig,elementary
+frog,elementary
+hen,elementary
+cow,elementary
+bug,elementary
+ant,elementary
+bee,elementary
+bat,elementary
+fox,elementary
+owl,elementary
+hat,elementary
+the,elementary
+and,elementary
+for,elementary
+you,elementary
+say,elementary
+she,elementary
+her,elementary
+was,elementary
+all,elementary
+are,elementary
+they,elementary
+what,elementary
+were,elementary
+when,elementary
+your,elementary
+can,elementary
+said,elementary
+there,elementary
+use,elementary
+each,elementary
+which,elementary
+this,elementary
+that,elementary
+look,elementary
+more,elementary
+made,elementary
+may,elementary
+part,elementary
+into,elementary
+over,elementary
+know,elementary
+than,elementary
+find,elementary
+first,elementary
+down,elementary
+been,elementary
+call,elementary
+who,elementary
+now,elementary
+long,elementary
+time,elementary
+much,elementary
+tell,elementary
+very,elementary
+new,elementary
+any,elementary
+from,elementary
+have,elementary
+some,elementary
+him,elementary
+make,elementary
+has,elementary
+see,elementary
+his,elementary
+how,elementary
+our,elementary
+out,elementary
+just,elementary
+get,elementary
+man,elementary
+old,elementary
+not,elementary
+day,elementary
+red,elementary
+blue,elementary
+green,elementary
+pink,elementary
+gray,elementary
+food,elementary
+cake,elementary
+pie,elementary
+egg,elementary
+jam,elementary
+bread,elementary
+rice,elementary
+meat,elementary
+soup,elementary
+book,elementary
+pen,elementary
+desk,elementary
+math,elementary
+read,elementary
+test,elementary
+gym,elementary
+bell,elementary
+art,elementary
+hall,elementary
+room,elementary
+map,elementary
+ball,elementary
+web,elementary
+site,elementary
+game,elementary
+app,elementary
+chat,elementary
+key,elementary
+type,elementary
+mouse,elementary
+click,elementary
+link,elementary
+good,elementary
+best,elementary
+fun,elementary
+kind,elementary
+nice,elementary
+glad,elementary
+joy,elementary
+like,elementary
+hope,elementary
+care,elementary
+help,elementary
+safe,elementary
+play,elementary
+sun,elementary
+moon,elementary
+star,elementary
+tree,elementary
+leaf,elementary
+rock,elementary
+rain,elementary
+snow,elementary
+hill,elementary
+car,elementary
+bike,elementary
+boat,elementary
+ship,elementary
+train,elementary
+plane,elementary
+van,elementary
+bus,elementary
+sky,elementary
+sand,elementary
+wind,elementary
+farm,elementary
+jump,elementary
+swim,elementary
+walk,elementary
+talk,elementary
+flag,elementary
+step,elementary
+gift,elementary
+shop,elementary
+love,elementary
+kite,elementary
+hand,elementary
+atom,elementary
+cell,elementary
+plant,elementary
+grow,elementary
+stem,elementary
+root,elementary
+soil,elementary
+air,elementary
+heat,elementary
+cold,elementary
+mix,elementary
+melt,elementary
+float,elementary
+sink,elementary
+mario,elementary
+luigi,elementary
+yoshi,elementary
+peach,elementary
+toad,elementary
+kirby,elementary
+rabbit,middle
+tiger,middle
+lion,middle
+monkey,middle
+zebra,middle
+elephant,middle
+giraffe,middle
+dolphin,middle
+penguin,middle
+turtle,middle
+panda,middle
+koala,middle
+bear,middle
+wolf,middle
+shark,middle
+eagle,middle
+lizard,middle
+octopus,middle
+yellow,middle
+purple,middle
+orange,middle
+brown,middle
+gold,middle
+silver,middle
+rainbow,middle
+violet,middle
+teal,middle
+navy,middle
+lime,middle
+apple,middle
+banana,middle
+grape,middle
+pizza,middle
+cookie,middle
+candy,middle
+popcorn,middle
+cheese,middle
+sandwich,middle
+taco,middle
+pasta,middle
+salad,middle
+carrot,middle
+potato,middle
+muffin,middle
+donut,middle
+berry,middle
+pencil,middle
+paper,middle
+chair,middle
+class,middle
+science,middle
+music,middle
+library,middle
+lunch,middle
+recess,middle
+backpack,middle
+homework,middle
+project,middle
+exam,middle
+computer,middle
+phone,middle
+tablet,middle
+robot,middle
+code,middle
+screen,middle
+video,middle
+photo,middle
+camera,middle
+watch,middle
+speaker,middle
+wireless,middle
+digital,middle
+keyboard,middle
+internet,middle
+happy,middle
+smile,middle
+brave,middle
+smart,middle
+bright,middle
+super,middle
+amazing,middle
+awesome,middle
+cool,middle
+great,middle
+epic,middle
+clever,middle
+hero,middle
+friend,middle
+excellent,middle
+forest,middle
+ocean,middle
+planet,middle
+mountain,middle
+garden,middle
+weather,middle
+climate,middle
+valley,middle
+canyon,middle
+soccer,middle
+baseball,middle
+football,middle
+tennis,middle
+hockey,middle
+basketball,middle
+swimming,middle
+running,middle
+jumping,middle
+skating,middle
+planet,middle
+century,middle
+galaxy,middle
+statue,middle
+history,middle
+gravity,middle
+museum,middle
+castle,middle
+theater,middle
+kingdom,middle
+wisdom,middle
+courage,middle
+victory,middle
+puzzle,middle
+trophy,middle
+concert,middle
+comedy,middle
+mystery,middle
+melody,middle
+rhythm,middle
+harmony,middle
+chorus,middle
+canvas,middle
+painting,middle
+drawing,middle
+sculpture,middle
+ceramic,middle
+theater,middle
+actor,middle
+studio,middle
+orchestra,middle
+composer,middle
+zelda,middle
+samus,middle
+donkey,middle
+bowser,middle
+wario,middle
+daisy,middle
+rosalina,middle
+pikachu,middle
+jigglypuff,middle
+mammal,high
+reptile,high
+amphibian,high
+primate,high
+canine,high
+feline,high
+equine,high
+marsupial,high
+crustacean,high
+ruby,high
+amber,high
+coral,high
+indigo,high
+turquoise,high
+sapphire,high
+emerald,high
+crimson,high
+cuisine,high
+nutrition,high
+dessert,high
+protein,high
+vitamin,high
+mineral,high
+organic,high
+vegetarian,high
+semester,high
+graduation,high
+biology,high
+chemistry,high
+physics,high
+algebra,high
+geometry,high
+calculus,high
+psychology,high
+network,high
+security,high
+software,high
+hardware,high
+programming,high
+interface,high
+protocol,high
+processor,high
+bandwidth,high
+outstanding,high
+exceptional,high
+brilliant,high
+fantastic,high
+magnificent,high
+impressive,high
+phenomenal,high
+remarkable,high
+wonderful,high
+molecule,high
+electron,high
+element,high
+compound,high
+ecosystem,high
+theorem,high
+equation,high
+velocity,high
+genetics,high
+narrative,high
+metaphor,high
+symbolism,high
+character,high
+chapter,high
+poetry,high
+fiction,high
+essay,high
+analysis,high
+synthesis,high
+hypothesis,high
+democracy,high
+republic,high
+economic,high
+function,high
+variable,high
+periodic,high
+symphony,high
+influence,high
+innovation,high
+strategy,high
+prosperity,high
+perspective,high
+integrity,high
+latitude,high
+longitude,high
+continent,high
+peninsula,high
+isthmus,high
+plateau,high
+climate,high
+terrain,high
+cultural,high
+boundary,high
+region,high
+capital,high
+nation,high
+resource,high
+ganondorf,high
+metroid,high
+mewtwo,high
+charizard,high
+bulbasaur,high
+charmander,high
+lucario,high
+vertebrate,staff
+invertebrate,staff
+carnivore,staff
+herbivore,staff
+omnivore,staff
+arthropod,staff
+mollusk,staff
+magenta,staff
+periwinkle,staff
+cerulean,staff
+vermilion,staff
+culinary,staff
+gourmet,staff
+nutrient,staff
+metabolism,staff
+gastronomy,staff
+appetizer,staff
+assessment,staff
+evaluation,staff
+criterion,staff
+differentiation,staff
+methodology,staff
+literature,staff
+algorithm,staff
+database,staff
+encryption,staff
+infrastructure,staff
+virtualization,staff
+peripheral,staff
+exemplary,staff
+proficient,staff
+distinguished,staff
+commendable,staff
+analytics,staff
+component,staff
+framework,staff
+structure,staff
+workflow,staff
+resource,staff
+integrate,staff
+pedagogy,staff
+cognition,staff
+curriculum,staff
+milestone,staff
+objective,staff
+benchmark,staff
+coherent,staff
+synthesis,staff
+compliance,staff
+initiative,staff
+foundation,staff
+strategic,staff
+scaffolding,staff
+innovation,staff
+leadership,staff
+engagement,staff
+professional,staff
+development,staff
+collaborative,staff
+achievement,staff
+acquisition,staff
+remediation,staff
+optimization,staff
+policy,staff
+guideline,staff
+procedure,staff
+implement,staff
+initiative,staff
+oversight,staff
+credential,staff
+faculty,staff
+committee,staff
+council,staff
+provision,staff
+accredit,staff
+tenure,staff
+pokemon,staff
+splatoon,staff
+starfox,staff
