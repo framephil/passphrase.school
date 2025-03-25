@@ -1216,3 +1216,56 @@ input[disabled] {
 [data-theme="dark"] .api-example pre {
     background-color: rgba(0, 0, 0, 0.3);
 }
+
+/* Word List Promo Section */
+.word-list-promo {
+    margin: 2rem 0;
+}
+
+.word-list-promo .info-column {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.promo-link {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Add two-column layout for the word list promo and why we made this sections */
+.two-column-layout {
+    display: grid;
+    grid-template-columns: minmax(300px, 3fr) minmax(250px, 2fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.two-column-layout .why-we-made-this {
+    margin-bottom: 0;
+}
+
+.word-list-promo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.word-list-promo p {
+    margin-bottom: 1.5rem;
+}
+
+.promo-link {
+    margin-top: auto;
+    text-align: center;
+}
+
+/* Responsive adjustments for two-column layout */
+@media (max-width: 768px) {
+    .two-column-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .two-column-layout .why-we-made-this {
+        margin-bottom: 2rem;
+    }
+}

@@ -29,7 +29,7 @@
         // First try loading from local path
         console.log('Attempting to load wordlist from local path: data/wordlist.csv');
         
-        fetch('data/wordlist.csv')
+        fetch('words/wordlist.csv')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Failed to load local wordlist: ${response.status} ${response.statusText}`);

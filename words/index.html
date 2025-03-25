@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word List Viewer &bull; Passphrase.school</title>
+    
+    <!-- Favicon setup including dark mode support -->
+    <link rel="icon" href="../favicon/favicon.ico" sizes="any">
+    <link rel="icon" href="../favicon/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <h1 class="site-title"><i class="ri-lock-password-line"></i> Passphrase.school</h1>
+            <p class="site-tagline">Generate secure, memorable passphrases suitable for K-12</p>
+            <div class="go-back-link"><a href="../index.html"><i class="ri-arrow-left-line"></i> Go back</a></div>
+            
+            <!-- Dark mode toggle -->
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="ri-sun-line" id="theme-toggle-light-icon"></i>
+                <i class="ri-moon-line" id="theme-toggle-dark-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="wordlist-container">
+            <div class="wordlist-header">
+                <h2>Word List Browser</h2>
+                <p>Explore all words used in the passphrase generator, or you can <a href="wordlist.csv" download="wordlist.csv" class="csv-link">download the CSV <i class="ri-file-download-line"></i></a></p>
+                
+                <div class="search-filter-container">
+                    <div class="filter-group">
+                        <label for="level-filter">Filter by level:</label>
+                        <select id="level-filter">
+                            <option value="all" selected>All Levels</option>
+                            <option value="elementary">Elementary</option>
+                            <option value="middle">Middle</option>
+                            <option value="high">High</option>
+                            <option value="staff">Staff</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-group">
+                        <label for="search-input">Search:</label>
+                        <input type="text" id="search-input" placeholder="Type to search...">
+                    </div>
+                </div>
+                
+                <div class="stats-container">
+                    <div id="word-count">Loading words...</div>
+                    <div class="level-stats">
+                        <div class="level-stat" data-level="elementary">Elementary: <span>-</span></div>
+                        <div class="level-stat" data-level="middle">Middle: <span>-</span></div>
+                        <div class="level-stat" data-level="high">High: <span>-</span></div>
+                        <div class="level-stat" data-level="staff">Staff: <span>-</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wordlist-table-container">
+                <table id="wordlist-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-sort="word">Word <i class="ri-arrow-up-down-line"></i></th>
+                            <th class="sortable" data-sort="level">Level <i class="ri-arrow-up-down-line"></i></th>
+                            <th class="sortable" data-sort="length">Length <i class="ri-arrow-up-down-line"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="wordlist-body">
+                        <tr>
+                            <td colspan="3" class="loading">Loading word list...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Add pagination controls -->
+            <div class="pagination" id="pagination">
+                <div class="page-size-container">
+                    <label for="page-size">Items per page:</label>
+                    <select id="page-size">
+                        <option value="10" selected>10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                    </select>
+                </div>
+                
+                <div class="pagination-controls">
+                    <button id="prev-page" class="pagination-btn" disabled><i class="ri-arrow-left-s-line"></i> Previous</button>
+                    <div class="pagination-info">
+                        Page <span id="current-page">1</span> of <span id="total-pages">1</span>
+                    </div>
+                    <button id="next-page" class="pagination-btn" disabled>Next <i class="ri-arrow-right-s-line"></i></button>
+                </div>
+            </div>
+            
+            <div class="home-link">
+                <a href="../index.html"><i class="ri-home-line"></i> Return to Homepage</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>Passphrase.school &bull; A secure passphrase generator for K-12 Education</p>
+            <div class="footer-links">
+                <i class="ri-github-fill"></i>
+                <a href="https://github.com/framephil/passphrase.school" target="_blank">View on GitHub</a>
+                <span class="footer-divider">|</span>
+                <span>Made with <span class="heart">❤️</span> by the K-12 tech professionals in Dallas, GA</span>
+            </div>
+            
+            <div class="browser-compatibility">
+                <p>This site works best on <i class="ri-edge-new-line"></i> Microsoft Edge</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="../js/wordlist.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="wordlist-viewer.js"></script>
+</body>
+</html>
