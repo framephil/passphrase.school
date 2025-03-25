@@ -191,8 +191,6 @@ big,elementary
 small,elementary
 fast,elementary
 slow,elementary
-hot,elementary
-cold,elementary
 soft,elementary
 hard,elementary
 road,elementary
@@ -328,7 +326,6 @@ swimming,middle
 running,middle
 jumping,middle
 skating,middle
-planet,middle
 century,middle
 galaxy,middle
 statue,middle
@@ -355,7 +352,6 @@ painting,middle
 drawing,middle
 sculpture,middle
 ceramic,middle
-theater,middle
 actor,middle
 studio,middle
 orchestra,middle
@@ -425,7 +421,6 @@ feline,high
 equine,high
 marsupial,high
 crustacean,high
-ruby,high
 amber,high
 coral,high
 indigo,high
@@ -507,7 +502,6 @@ continent,high
 peninsula,high
 isthmus,high
 plateau,high
-climate,high
 terrain,high
 cultural,high
 boundary,high
@@ -609,7 +603,6 @@ component,staff
 framework,staff
 structure,staff
 workflow,staff
-resource,staff
 integrate,staff
 pedagogy,staff
 cognition,staff
@@ -618,27 +611,22 @@ milestone,staff
 objective,staff
 benchmark,staff
 coherent,staff
-synthesis,staff
 compliance,staff
 initiative,staff
 foundation,staff
 strategic,staff
 scaffolding,staff
-innovation,staff
 leadership,staff
 engagement,staff
 professional,staff
 development,staff
 collaborative,staff
-achievement,staff
 acquisition,staff
 remediation,staff
 optimization,staff
 policy,staff
 guideline,staff
-procedure,staff
 implement,staff
-initiative,staff
 oversight,staff
 credential,staff
 faculty,staff
@@ -650,9 +638,6 @@ tenure,staff
 pokemon,staff
 splatoon,staff
 starfox,staff
-evaluation,staff
-criterion,staff
-assessment,staff
 articulation,staff
 implementation,staff
 accountability,staff
@@ -676,7 +661,6 @@ regulatory,staff
 procurement,staff
 proprietary,staff
 categorical,staff
-methodology,staff
 differentiated,staff
 intervention,staff
 supplemental,staff
