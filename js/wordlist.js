@@ -23,55 +23,103 @@
     loadWordListFromCSV();
     
     /**
-     * Loads the wordlist from the CSV file
+     * Loads the wordlist from the CSV file, first trying local path then remote URL
      */
     function loadWordListFromCSV() {
+        // First try loading from local path
+        console.log('Attempting to load wordlist from local path: data/wordlist.csv');
+        
         fetch('data/wordlist.csv')
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`Failed to load wordlist: ${response.status} ${response.statusText}`);
+                    throw new Error(`Failed to load local wordlist: ${response.status} ${response.statusText}`);
                 }
+                console.log('Successfully loaded wordlist from local path');
                 return response.text();
             })
             .then(csvText => {
-                parseCSV(csvText);
-                isLoaded = true;
-                
-                // Execute any callbacks that were waiting for the data
-                callbacks.forEach(callback => {
-                    try {
-                        callback(null, true);
-                    } catch(e) {
-                        console.error('Error in callback:', e);
-                    }
-                });
+                handleSuccessfulLoad(csvText);
             })
             .catch(error => {
-                console.error('Error loading wordlist:', error);
-                hasError = true;
-                errorMessage = error.message;
+                console.warn('Local wordlist load failed, trying remote URL:', error);
                 
-                // Execute callbacks with error
-                callbacks.forEach(callback => {
-                    try {
-                        callback(error, false);
-                    } catch(e) {
-                        console.error('Error in error callback:', e);
-                    }
-                });
-                
-                // Display error on page if possible
-                const generator = document.getElementById('generator');
-                if (generator) {
-                    generator.innerHTML = `
-                        <div class="error-message" style="color: var(--danger-color); text-align: center; padding: 2rem;">
-                            <h3>Error Loading Word List</h3>
-                            <p>${errorMessage}</p>
-                            <p>Please check that the CSV file exists at /data/wordlist.csv</p>
-                        </div>
-                    `;
+                // Try loading from the website URL as fallback
+                loadWordListFromRemoteURL();
+            });
+    }
+    
+    /**
+     * Attempts to load the wordlist from the remote URL as a fallback
+     */
+    function loadWordListFromRemoteURL() {
+        console.log('Attempting to load wordlist from remote URL: https://passphrase.school/data/wordlist.csv');
+        
+        fetch('https://passphrase.school/data/wordlist.csv')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to load remote wordlist: ${response.status} ${response.statusText}`);
+                }
+                console.log('Successfully loaded wordlist from remote URL');
+                return response.text();
+            })
+            .then(csvText => {
+                handleSuccessfulLoad(csvText);
+            })
+            .catch(error => {
+                console.error('Both local and remote wordlist loads failed:', error);
+                handleLoadError(error);
+            });
+    }
+    
+    /**
+     * Handles successful CSV load
+     */
+    function handleSuccessfulLoad(csvText) {
+        try {
+            parseCSV(csvText);
+            isLoaded = true;
+            
+            // Execute any callbacks that were waiting for the data
+            callbacks.forEach(callback => {
+                try {
+                    callback(null, true);
+                } catch(e) {
+                    console.error('Error in callback:', e);
                 }
             });
+        } catch (error) {
+            console.error('Error parsing CSV:', error);
+            handleLoadError(error);
+        }
+    }
+    
+    /**
+     * Handles errors from loading the wordlist
+     */
+    function handleLoadError(error) {
+        hasError = true;
+        errorMessage = error.message;
+        
+        // Execute callbacks with error
+        callbacks.forEach(callback => {
+            try {
+                callback(error, false);
+            } catch(e) {
+                console.error('Error in error callback:', e);
+            }
+        });
+        
+        // Display error on page if possible
+        const generator = document.getElementById('generator');
+        if (generator) {
+            generator.innerHTML = `
+                <div class="error-message" style="color: var(--danger-color); text-align: center; padding: 2rem;">
+                    <h3>Error Loading Word List</h3>
+                    <p>${errorMessage}</p>
+                    <p>Attempted to load from both local path and https://passphrase.school/data/wordlist.csv</p>
+                </div>
+            `;
+        }
     }
     
     /**
