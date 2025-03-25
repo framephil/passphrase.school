@@ -52,9 +52,9 @@
      * Attempts to load the wordlist from the remote URL as a fallback
      */
     function loadWordListFromRemoteURL() {
-        console.log('Attempting to load wordlist from remote URL: https://passphrase.school/data/wordlist.csv');
+        console.log('Attempting to load wordlist from remote URL: https://passphrase.school/words/wordlist.csv');
         
-        fetch('https://passphrase.school/data/wordlist.csv')
+        fetch('https://passphrase.school/words/wordlist.csv')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Failed to load remote wordlist: ${response.status} ${response.statusText}`);
